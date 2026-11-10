@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master de Algoritmos, Subalgoritmos y Recursividad - Preparación para Examen</title>
+    <title>Master en Algoritmos - Preparación Intensiva v2.0</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -37,7 +37,7 @@
 
         /* Sidebar Navigation */
         sidebar {
-            width: 260px;
+            width: 280px;
             background-color: #0b1120;
             border-right: 1px solid var(--border);
             display: flex;
@@ -128,12 +128,13 @@
             color: var(--text-muted);
         }
 
-        /* Filter Controls */
+        /* Controls */
         .controls {
             display: flex;
             gap: 15px;
             margin-bottom: 25px;
             flex-wrap: wrap;
+            align-items: center;
         }
 
         .select-box, .btn {
@@ -162,6 +163,16 @@
             background-color: #0369a1;
         }
 
+        .btn-shuffle {
+            background-color: #8b5cf6;
+            border-color: #8b5cf6;
+            font-weight: 600;
+        }
+
+        .btn-shuffle:hover {
+            background-color: #7c3aed;
+        }
+
         /* Cards Grid */
         .grid-cards {
             display: grid;
@@ -177,7 +188,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 220px;
+            min-height: 230px;
             cursor: pointer;
             transition: transform 0.2s, border-color 0.2s;
             position: relative;
@@ -255,7 +266,7 @@
             line-height: 1.5;
         }
 
-        /* Doctor del codigo (Bug Finder) */
+        /* Doctor del codigo */
         .bug-card {
             background-color: var(--panel-bg);
             border: 1px solid var(--border);
@@ -352,7 +363,7 @@
             gap: 15px;
         }
 
-        /* Editor de codigo interactivo */
+        /* Editor de codigo */
         .editor-container {
             background-color: var(--panel-bg);
             border-radius: 12px;
@@ -362,7 +373,7 @@
 
         textarea.code-input {
             width: 100%;
-            height: 250px;
+            height: 230px;
             background-color: #090d16;
             color: var(--text-light);
             border: 1px solid var(--border);
@@ -399,6 +410,43 @@
         .check-item.valid { color: var(--accent-green); }
         .check-item.invalid { color: var(--text-muted); }
 
+        /* Quiz Simulado Container */
+        .quiz-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+        }
+
+        .quiz-card h3 {
+            margin-bottom: 15px;
+            color: var(--accent-blue);
+        }
+
+        .quiz-textarea {
+            width: 100%;
+            height: 100px;
+            background-color: #090d16;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.95rem;
+            margin-bottom: 12px;
+            resize: vertical;
+        }
+
+        .solution-box {
+            display: none;
+            background-color: #0b1120;
+            border-left: 4px solid var(--accent-purple);
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 10px;
+            color: var(--accent-green);
+            font-size: 0.95rem;
+        }
     </style>
 </head>
 <body>
@@ -406,11 +454,14 @@
     <sidebar>
         <div class="brand">
             <i class="fa-solid fa-brain"></i>
-            <h2>Master en <span>Algoritmos</span></h2>
+            <h2>Master en <span>Algoritmos</span> v2.0</h2>
         </div>
         <ul class="menu-list">
             <li class="menu-item active" onclick="switchTab('teoria')">
                 <i class="fa-solid fa-book"></i> 45 Preguntas Teóricas
+            </li>
+            <li class="menu-item" onclick="switchTab('quiz')">
+                <i class="fa-solid fa-bullseye"></i> Examen Simulado (10 Aleatorias)
             </li>
             <li class="menu-item" onclick="switchTab('formulas')">
                 <i class="fa-solid fa-code"></i> Fórmulas de Sintaxis
@@ -446,6 +497,8 @@
                 <select id="filter-topic" class="select-box" onchange="filterQuestions()">
                     <option value="all">Todos los Temas (1 al 15)</option>
                 </select>
+
+                <button class="btn btn-shuffle" onclick="shuffleAndRender()"><i class="fa-solid fa-shuffle"></i> 🔀 Barajar Preguntas</button>
             </div>
 
             <div class="grid-cards" id="questions-grid">
@@ -453,7 +506,23 @@
             </div>
         </div>
 
-        <!-- TAB 2: FORMULAS DE SINTAXIS -->
+        <!-- TAB 2: EXAMEN SIMULADO (10 ALEATORIAS) -->
+        <div id="tab-quiz" class="tab-content">
+            <header>
+                <h1>🎯 Examen Simulado (Modo Aleatorio)</h1>
+                <p>Genera 10 preguntas aleatorias de los 15 temas para ponerte a prueba como si estuvieras en el examen real.</p>
+            </header>
+
+            <div class="controls">
+                <button class="btn btn-primary" onclick="generateSimulatedExam()"><i class="fa-solid fa-arrows-rotate"></i> Generar Nuevo Examen (10 Preguntas)</button>
+            </div>
+
+            <div id="simulated-exam-container">
+                <!-- Se llena dinamicamente con preguntas aleatorias -->
+            </div>
+        </div>
+
+        <!-- TAB 3: FORMULAS DE SINTAXIS -->
         <div id="tab-formulas" class="tab-content">
             <header>
                 <h1>Fórmulas de Pseudocódigo para Memorizar</h1>
@@ -522,7 +591,7 @@ FinFuncion
             </div>
         </div>
 
-        <!-- TAB 3: DOCTOR DEL CODIGO -->
+        <!-- TAB 4: DOCTOR DEL CODIGO -->
         <div id="tab-doctor" class="tab-content">
             <header>
                 <h1>El Doctor del Código (Encuentra el Error)</h1>
@@ -534,7 +603,7 @@ FinFuncion
             </div>
         </div>
 
-        <!-- TAB 4: PILA RECURSIVA VISUAL -->
+        <!-- TAB 5: PILA RECURSIVA VISUAL -->
         <div id="tab-pila" class="tab-content">
             <header>
                 <h1>Simulador de Pila de Llamadas (Call Stack)</h1>
@@ -565,7 +634,7 @@ FinFuncion
             </div>
         </div>
 
-        <!-- TAB 5: SIMULADOR DE ESCRITURA -->
+        <!-- TAB 6: SIMULADOR DE ESCRITURA -->
         <div id="tab-simulador" class="tab-content">
             <header>
                 <h1>Práctica de Escritura de Pseudocódigo</h1>
@@ -588,8 +657,8 @@ FinFuncion
     </main>
 
     <script>
-        // BANCO DE 45 PREGUNTAS COMPLETO (15 TEMAS x 3 PREGUNTAS)
-        const questionsData = [
+        // BANCO DE 45 PREGUNTAS COMPLETO
+        let questionsData = [
             // TEMA 1
             { topic: 1, block: "I", q: "¿Qué es un algoritmo y cuáles son sus 3 características fundamentales?", a: "Es un conjunto finito de pasos ordenados y no ambiguos para resolver un problema. Sus 3 características son: Preciso (indica el orden exacto), Definido (mismos datos producen mismo resultado) y Finito (debe terminar)." },
             { topic: 1, block: "I", q: "¿Cuáles son las fases para la resolución de un problema por computadora?", a: "1. Análisis del problema, 2. Diseño del algoritmo, 3. Codificación, 4. Prueba y Depuración, 5. Mantenimiento." },
@@ -666,7 +735,6 @@ FinFuncion
             { topic: 15, block: "III", q: "¿Cuándo se debe transformar un algoritmo recursivo a iterativo?", a: "Cuando se requiera optimizar al máximo el rendimiento y evitar riesgos de desbordamiento de memoria por llamadas masivas." }
         ];
 
-        // DATOS DE BUGS (DOCTOR DEL CODIGO)
         const bugData = [
             {
                 code: "Funcion Entero Sumar(a, b)\n    resultado <- a + b\nFinFuncion",
@@ -688,12 +756,25 @@ FinFuncion
             }
         ];
 
-        // INICIALIZACION
         window.onload = () => {
             populateTopicDropdown();
+            shuffleArray(questionsData); // Barajar al iniciar
             renderQuestions();
             renderBugs();
+            generateSimulatedExam();
         };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function shuffleAndRender() {
+            shuffleArray(questionsData);
+            renderQuestions();
+        }
 
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
@@ -746,15 +827,44 @@ FinFuncion
 
         function toggleAnswer(card) {
             const ans = card.querySelector('.card-a');
-            if (ans.style.display === 'block') {
-                ans.style.display = 'none';
-            } else {
-                ans.style.display = 'block';
-            }
+            ans.style.display = (ans.style.display === 'block') ? 'none' : 'block';
         }
 
         function filterQuestions() {
             renderQuestions();
+        }
+
+        // SIMULADOR DE EXAMEN (10 ALEATORIAS)
+        function generateSimulatedExam() {
+            const container = document.getElementById('simulated-exam-container');
+            container.innerHTML = '';
+
+            // Copia y mezcla
+            let shuffled = [...questionsData];
+            shuffleArray(shuffled);
+            let selected = shuffled.slice(0, 10);
+
+            selected.forEach((item, index) => {
+                const qCard = document.createElement('div');
+                qCard.className = 'quiz-card';
+
+                qCard.innerHTML = `
+                    <h3>Pregunta #${index + 1} (Tema ${item.topic})</h3>
+                    <p style="margin-bottom: 12px; font-weight: 500;">${item.q}</p>
+                    <textarea class="quiz-textarea" placeholder="Escribe tu respuesta como si estuvieras en tu hoja de examen..."></textarea>
+                    <button class="btn btn-primary" onclick="toggleSolution(${index})">Verificar con Respuesta Modelo</button>
+                    <div class="solution-box" id="sol-${index}">
+                        <strong>Respuesta Esperada en Examen:</strong><br>
+                        ${item.a}
+                    </div>
+                `;
+                container.appendChild(qCard);
+            });
+        }
+
+        function toggleSolution(index) {
+            const box = document.getElementById(`sol-${index}`);
+            box.style.display = (box.style.display === 'block') ? 'none' : 'block';
         }
 
         function renderBugs() {
@@ -794,7 +904,7 @@ FinFuncion
             }
         }
 
-        // VISUALIZADOR DE STACK
+        // STACK VISUALIZER
         let currentN = 4;
         let stackState = [];
 
@@ -836,7 +946,7 @@ FinFuncion
             }
         }
 
-        // SIMULADOR DE ESCRITURA DE CODIGO
+        // SIMULADOR DE ESCRITURA
         function validateCode() {
             const val = document.getElementById('code-editor').value.toLowerCase();
 
@@ -849,11 +959,7 @@ FinFuncion
 
         function toggleCheck(id, isValid) {
             const el = document.getElementById(id);
-            if (isValid) {
-                el.className = 'check-item valid';
-            } else {
-                el.className = 'check-item invalid';
-            }
+            el.className = isValid ? 'check-item valid' : 'check-item invalid';
         }
     </script>
 </body>
