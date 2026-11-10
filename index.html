@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Master en Algoritmos - Multi-Dispositivo v3.0</title>
+    <title>Master en Algoritmos - Preparación Intensiva v4.0</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         :root {
@@ -37,14 +37,10 @@
             overflow: hidden;
         }
 
-        /* Responsive Layout Switch for Mobile/Tablet/Desktop */
         @media (min-width: 768px) {
-            body {
-                flex-direction: row;
-            }
+            body { flex-direction: row; }
         }
 
-        /* Sidebar Navigation & Mobile Header */
         sidebar {
             width: 100%;
             background-color: #0b1120;
@@ -58,7 +54,7 @@
 
         @media (min-width: 768px) {
             sidebar {
-                width: 260px;
+                width: 280px;
                 border-bottom: none;
                 border-right: 1px solid var(--border);
                 padding: 20px 0;
@@ -86,21 +82,10 @@
             gap: 10px;
         }
 
-        .brand i {
-            font-size: 1.5rem;
-            color: var(--accent-blue);
-        }
+        .brand i { font-size: 1.5rem; color: var(--accent-blue); }
+        .brand h2 { font-size: 1rem; line-height: 1.2; }
+        .brand span { color: var(--accent-blue); }
 
-        .brand h2 {
-            font-size: 1rem;
-            line-height: 1.2;
-        }
-
-        .brand span {
-            color: var(--accent-blue);
-        }
-
-        /* Menu Button for Phones */
         .mobile-menu-toggle {
             background: none;
             border: none;
@@ -109,11 +94,7 @@
             cursor: pointer;
         }
 
-        @media (min-width: 768px) {
-            .mobile-menu-toggle {
-                display: none;
-            }
-        }
+        @media (min-width: 768px) { .mobile-menu-toggle { display: none; } }
 
         .menu-list {
             list-style: none;
@@ -124,9 +105,7 @@
             overflow-y: auto;
         }
 
-        .menu-list.open {
-            display: flex;
-        }
+        .menu-list.open { display: flex; }
 
         @media (min-width: 768px) {
             .menu-list {
@@ -154,12 +133,8 @@
             border-left: 4px solid var(--accent-blue);
         }
 
-        .menu-item i {
-            width: 20px;
-            text-align: center;
-        }
+        .menu-item i { width: 20px; text-align: center; }
 
-        /* Main Area */
         main {
             flex-grow: 1;
             overflow-y: auto;
@@ -167,11 +142,7 @@
             background-color: var(--bg-dark);
         }
 
-        @media (min-width: 768px) {
-            main {
-                padding: 30px;
-            }
-        }
+        @media (min-width: 768px) { main { padding: 30px; } }
 
         .tab-content {
             display: none;
@@ -179,32 +150,13 @@
             margin: 0 auto;
         }
 
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content.active { display: block; }
 
-        header {
-            margin-bottom: 20px;
-        }
+        header { margin-bottom: 20px; }
+        header h1 { font-size: 1.4rem; color: var(--accent-blue); margin-bottom: 5px; }
+        @media (min-width: 768px) { header h1 { font-size: 1.8rem; } }
+        header p { color: var(--text-muted); font-size: 0.9rem; }
 
-        header h1 {
-            font-size: 1.4rem;
-            color: var(--accent-blue);
-            margin-bottom: 5px;
-        }
-
-        @media (min-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Controls Area */
         .controls {
             display: flex;
             gap: 10px;
@@ -227,26 +179,12 @@
         }
 
         @media (min-width: 768px) {
-            .select-box, .btn {
-                flex: 0 1 auto;
-                padding: 10px 15px;
-                font-size: 0.95rem;
-            }
+            .select-box, .btn { flex: 0 1 auto; padding: 10px 15px; font-size: 0.95rem; }
         }
 
-        .btn-primary {
-            background-color: #0284c7;
-            border-color: #0284c7;
-            font-weight: 600;
-        }
+        .btn-primary { background-color: #0284c7; border-color: #0284c7; font-weight: 600; }
+        .btn-shuffle { background-color: #8b5cf6; border-color: #8b5cf6; font-weight: 600; }
 
-        .btn-shuffle {
-            background-color: #8b5cf6;
-            border-color: #8b5cf6;
-            font-weight: 600;
-        }
-
-        /* Dynamic Touch Grid Cards */
         .grid-cards {
             display: grid;
             grid-template-columns: 1fr;
@@ -254,10 +192,7 @@
         }
 
         @media (min-width: 600px) {
-            .grid-cards {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 20px;
-            }
+            .grid-cards { grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
         }
 
         .card {
@@ -268,14 +203,12 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 200px;
+            min-height: 220px;
             cursor: pointer;
             transition: transform 0.2s, border-color 0.2s;
         }
 
-        .card:active, .card:hover {
-            border-color: var(--accent-blue);
-        }
+        .card:active, .card:hover { border-color: var(--accent-blue); }
 
         .card-tag {
             align-self: flex-start;
@@ -288,13 +221,7 @@
             margin-bottom: 10px;
         }
 
-        .card-q {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-bottom: 12px;
-            line-height: 1.4;
-        }
-
+        .card-q { font-weight: 600; font-size: 1rem; margin-bottom: 12px; line-height: 1.4; }
         .card-a {
             background-color: var(--bg-dark);
             border-radius: 8px;
@@ -304,6 +231,7 @@
             display: none;
             margin-top: auto;
             border-left: 3px solid var(--accent-green);
+            line-height: 1.5;
         }
 
         .card-footer {
@@ -315,7 +243,6 @@
             color: var(--text-muted);
         }
 
-        /* Formulas & Bug Cards */
         .formula-box, .bug-card, .quiz-card {
             background-color: var(--panel-bg);
             border: 1px solid var(--border);
@@ -324,11 +251,10 @@
             margin-bottom: 20px;
         }
 
-        @media (min-width: 768px) {
-            .formula-box, .bug-card, .quiz-card {
-                padding: 20px;
-            }
-        }
+        @media (min-width: 768px) { .formula-box, .bug-card, .quiz-card { padding: 20px; } }
+
+        .formula-box h3 { color: var(--accent-purple); margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
+        .code-explain { margin-top: 10px; font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; }
 
         pre {
             background-color: #090d16;
@@ -342,20 +268,9 @@
             line-height: 1.4;
         }
 
-        @media (min-width: 768px) {
-            pre {
-                font-size: 0.95rem;
-                padding: 15px;
-            }
-        }
+        @media (min-width: 768px) { pre { font-size: 0.95rem; padding: 15px; } }
 
-        .bug-options {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
+        .bug-options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
         .option-btn {
             background-color: var(--card-bg);
             border: 1px solid var(--border);
@@ -376,31 +291,11 @@
             font-size: 0.9rem;
         }
 
-        .feedback.correct {
-            background-color: rgba(74, 222, 128, 0.15);
-            color: var(--accent-green);
-            border: 1px solid var(--accent-green);
-        }
+        .feedback.correct { background-color: rgba(74, 222, 128, 0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
+        .feedback.incorrect { background-color: rgba(248, 113, 113, 0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
 
-        .feedback.incorrect {
-            background-color: rgba(248, 113, 113, 0.15);
-            color: var(--accent-red);
-            border: 1px solid var(--accent-red);
-        }
-
-        /* Stack Visualizer */
-        .stack-visualizer {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 15px;
-        }
-
-        @media (min-width: 768px) {
-            .stack-visualizer {
-                flex-direction: row;
-            }
-        }
+        .stack-visualizer { display: flex; flex-direction: column; gap: 20px; margin-top: 15px; }
+        @media (min-width: 768px) { .stack-visualizer { flex-direction: row; } }
 
         .stack-container {
             background-color: var(--panel-bg);
@@ -425,7 +320,6 @@
             font-size: 0.85rem;
         }
 
-        /* Editor de codigo en pantalla touch */
         textarea.code-input, textarea.quiz-textarea {
             width: 100%;
             background-color: #090d16;
@@ -440,21 +334,10 @@
             margin-top: 10px;
         }
 
-        textarea.code-input {
-            height: 180px;
-        }
+        textarea.code-input { height: 180px; }
+        textarea.quiz-textarea { height: 90px; }
 
-        textarea.quiz-textarea {
-            height: 90px;
-        }
-
-        .check-list {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 8px;
-            margin-top: 15px;
-        }
-
+        .check-list { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px; }
         .check-item {
             background-color: var(--card-bg);
             padding: 8px 10px;
@@ -486,19 +369,19 @@
         <div class="brand">
             <div class="brand-title">
                 <i class="fa-solid fa-brain"></i>
-                <h2>Master en <span>Algoritmos</span> v3.0</h2>
+                <h2>Master en <span>Algoritmos</span> v4.0</h2>
             </div>
             <button class="mobile-menu-toggle" onclick="toggleMobileMenu()"><i class="fa-solid fa-bars"></i></button>
         </div>
         <ul class="menu-list" id="main-menu">
             <li class="menu-item active" onclick="switchTab('teoria')">
-                <i class="fa-solid fa-book"></i> 45 Preguntas Teóricas
+                <i class="fa-solid fa-book"></i> 75 Preguntas Teóricas
             </li>
             <li class="menu-item" onclick="switchTab('quiz')">
                 <i class="fa-solid fa-bullseye"></i> Examen Simulado (10 Aleatorias)
             </li>
             <li class="menu-item" onclick="switchTab('formulas')">
-                <i class="fa-solid fa-code"></i> Fórmulas de Sintaxis
+                <i class="fa-solid fa-code"></i> Códigos Explicados Paso a Paso
             </li>
             <li class="menu-item" onclick="switchTab('doctor')">
                 <i class="fa-solid fa-user-md"></i> Doctor del Código
@@ -513,11 +396,11 @@
     </sidebar>
 
     <main>
-        <!-- TAB 1: TEORIA 45 PREGUNTAS -->
+        <!-- TAB 1: TEORIA 75 PREGUNTAS -->
         <div id="tab-teoria" class="tab-content active">
             <header>
-                <h1>45 Preguntas Teóricas para Examen</h1>
-                <p>Toca cualquier tarjeta para revelar la respuesta exacta recomendada.</p>
+                <h1>75 Preguntas Teóricas de Examen (5 por Tema)</h1>
+                <p>Toca cualquier tarjeta para ver la respuesta esperada por el profesor.</p>
             </header>
 
             <div class="controls">
@@ -535,87 +418,99 @@
                 <button class="btn btn-shuffle" onclick="shuffleAndRender()"><i class="fa-solid fa-shuffle"></i> Barajar Preguntas</button>
             </div>
 
-            <div class="grid-cards" id="questions-grid">
-                <!-- Tarjetas cargadas dinamicamente -->
-            </div>
+            <div class="grid-cards" id="questions-grid"></div>
         </div>
 
         <!-- TAB 2: EXAMEN SIMULADO -->
         <div id="tab-quiz" class="tab-content">
             <header>
                 <h1>🎯 Examen Simulado Aleatorio</h1>
-                <p>Prueba tu nivel con 10 preguntas seleccionadas al azar en cada intento.</p>
+                <p>Genera 10 preguntas aleatorias de los 15 temas para ensayar tus respuestas escritas a mano.</p>
             </header>
 
             <div class="controls">
-                <button class="btn btn-primary" onclick="generateSimulatedExam()"><i class="fa-solid fa-arrows-rotate"></i> Nuevo Examen (10 Aleatorias)</button>
+                <button class="btn btn-primary" onclick="generateSimulatedExam()"><i class="fa-solid fa-arrows-rotate"></i> Generar Nuevo Examen (10 Preguntas)</button>
             </div>
 
             <div id="simulated-exam-container"></div>
         </div>
 
-        <!-- TAB 3: FORMULAS DE SINTAXIS -->
+        <!-- TAB 3: CODIGOS EXPLICADOS PASO A PASO -->
         <div id="tab-formulas" class="tab-content">
             <header>
-                <h1>Fórmulas de Pseudocódigo</h1>
-                <p>Plantillas estándar para memorizar y escribir en papel.</p>
+                <h1>Códigos Reales Explicados Paso a Paso</h1>
+                <p>Ejemplos clásicos de examen con análisis detallado de cada línea de pseudocódigo.</p>
             </header>
 
             <div class="formula-box">
-                <h3><i class="fa-solid fa-code-branch"></i> 1. Condicional `Si - Sino`</h3>
+                <h3><i class="fa-solid fa-calculator"></i> 1. Verificar si un Número es Primo (Módulo 1 y 2)</h3>
 <pre>
-Si (condicion_1) Entonces
-    // Bloque 1
-Sino Si (condicion_2) Entonces
-    // Bloque 2
-Sino
-    // Bloque por defecto
-FinSi
-</pre>
-            </div>
-
-            <div class="formula-box">
-                <h3><i class="fa-solid fa-arrows-spin"></i> 2. Bucles (`Para` y `Mientras`)</h3>
-<pre>
-// Bucle PARA
-Para i <- 1 Hasta N Con Paso 1 Hacer
-    // Repeticion N veces
-FinPara
-
-// Bucle MIENTRAS
-Mientras (condicion) Hacer
-    // Repeticion
-    i <- i + 1  // ¡Avanzar contador!
-FinMientras
-</pre>
-            </div>
-
-            <div class="formula-box">
-                <h3><i class="fa-solid fa-cubes"></i> 3. Subalgoritmos</h3>
-<pre>
-// FUNCIÓN (Con retorno)
-Funcion Entero Sumar(Entero a, Entero b)
-    Retornar a + b
-FinFuncion
-
-// PROCEDIMIENTO (Sin retorno)
-Procedimiento Imprimir(Cadena msg)
-    Escribir msg
-FinProcedimiento
-</pre>
-            </div>
-
-            <div class="formula-box">
-                <h3><i class="fa-solid fa-rotate-left"></i> 4. Esqueleto Recursivo</h3>
-<pre>
-Funcion Entero Factorial(Entero n)
-    Si (n <= 1) Entonces
-        Retornar 1  // CASO BASE
+Funcion Booleano EsPrimo(Entero num)
+    Entero i, divisores
+    Si num <= 1 Entonces
+        Retornar Falso
+    FinSi
+    
+    divisores <- 0
+    Para i <- 1 Hasta num Con Paso 1 Hacer
+        Si (num MOD i == 0) Entonces
+            divisores <- divisores + 1
+        FinSi
+    FinPara
+    
+    Si divisores == 2 Entonces
+        Retornar Verdadero
     Sino
-        Retornar n * Factorial(n - 1)  // CASO RECURSIVO
+        Retornar Falso
     FinSi
 FinFuncion
 </pre>
+                <div class="code-explain">
+                    <strong>Explicación paso a paso:</strong><br>
+                    • <strong>Línea 3:</strong> Si el número es 1 o menor, no es primo (caso especial).<br>
+                    • <strong>Línea 8:</strong> Usamos un contador <code>divisores</code> que inicia en 0.<br>
+                    • <strong>Línea 9:</strong> El bucle <code>Para</code> prueba dividir <code>num</code> entre todos los enteros desde 1 hasta <code>num</code>.<br>
+                    • <strong>Línea 10:</strong> El operador <code>MOD</code> obtiene el resto. Si el resto es 0, es un divisor exacto.<br>
+                    • <strong>Línea 15:</strong> Si exactamente 2 números lo dividieron (el 1 y él mismo), es primo.
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <h3><i class="fa-solid fa-arrows-split-up-and-left"></i> 2. Paso por Referencia: Intercambiar 2 Variables (Módulo 2)</h3>
+<pre>
+Procedimiento Intercambiar(Por Referencia Entero a, Por Referencia Entero b)
+    Entero aux
+    aux <- a
+    a <- b
+    b <- aux
+FinProcedimiento
+</pre>
+                <div class="code-explain">
+                    <strong>Explicación paso a paso:</strong><br>
+                    • <strong>Por Referencia:</strong> Es indispensable la palabra reservada <code>Por Referencia</code> para que los cambios persistan fuera del procedimiento.<br>
+                    • <strong>Línea 3:</strong> Guardamos el valor original de <code>a</code> en la variable temporal <code>aux</code> para no perderlo.<br>
+                    • <strong>Líneas 4-5:</strong> Le pasamos el valor de <code>b</code> a <code>a</code>, y luego asignamos <code>aux</code> a <code>b</code>.
+                </div>
+            </div>
+
+            <div class="formula-box">
+                <h3><i class="fa-solid fa-rotate-left"></i> 3. Suma Recursiva de los Primeros N Números (Módulo 3)</h3>
+<pre>
+Funcion Entero SumaRecursiva(Entero n)
+    // CASO BASE: Detiene las llamadas recursivas
+    Si (n <= 0) Entonces
+        Retornar 0
+    Sino
+        // CASO RECURSIVO: Suma 'n' con el resultado de la función con (n - 1)
+        Retornar n + SumaRecursiva(n - 1)
+    FinSi
+FinFuncion
+</pre>
+                <div class="code-explain">
+                    <strong>Explicación paso a paso:</strong><br>
+                    • <strong>Caso Base:</strong> Cuando <code>n</code> llega a 0, devuelve 0 sin volver a llamar a la función.<br>
+                    • <strong>Caso Recursivo:</strong> Si <code>n = 3</code>, calcula <code>3 + SumaRecursiva(2)</code>. Se apila en memoria hasta llegar al Caso Base y luego desapila devolviendo el total (3 + 2 + 1 + 0 = 6).
+                </div>
             </div>
         </div>
 
@@ -623,7 +518,7 @@ FinFuncion
         <div id="tab-doctor" class="tab-content">
             <header>
                 <h1>El Doctor del Código</h1>
-                <p>Encuentra los errores más comunes cometidos en exámenes a mano.</p>
+                <p>Identifica los errores más penalizados por los ingenieros en evaluaciones escritas.</p>
             </header>
 
             <div id="bugs-container"></div>
@@ -632,15 +527,15 @@ FinFuncion
         <!-- TAB 5: PILA RECURSIVA VISUAL -->
         <div id="tab-pila" class="tab-content">
             <header>
-                <h1>Simulador de Pila (Call Stack)</h1>
-                <p>Visualiza el proceso de Apilado (Push) y Desapilado (Pop) en memoria.</p>
+                <h1>Simulador de Pila de Llamadas (Call Stack)</h1>
+                <p>Visualiza cómo la memoria apila y desapila en tiempo real.</p>
             </header>
 
             <div class="formula-box">
                 <h3>Función bajo prueba: <code>Factorial(N)</code></h3>
                 <div style="display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap;">
-                    <button class="btn btn-primary" onclick="pushStack()">Push (Apilar)</button>
-                    <button class="btn" onclick="popStack()">Pop (Desapilar)</button>
+                    <button class="btn btn-primary" onclick="pushStack()">Push (Apilar Llamada)</button>
+                    <button class="btn" onclick="popStack()">Pop (Desapilar/Resolver)</button>
                     <button class="btn" style="background-color: var(--accent-red); border:none;" onclick="resetStack()">Reset</button>
                 </div>
             </div>
@@ -649,7 +544,7 @@ FinFuncion
                 <div class="stack-container" id="stack-box" style="flex:1;"></div>
                 <div class="formula-box" style="flex:1;">
                     <h3>Estado de Memoria</h3>
-                    <p id="stack-status" style="color: var(--text-muted); margin-top: 10px;">Toca "Push" para apilar llamadas recursivas.</p>
+                    <p id="stack-status" style="color: var(--text-muted); margin-top: 10px;">Presiona "Push" para apilar llamadas recursivas.</p>
                 </div>
             </div>
         </div>
@@ -657,12 +552,12 @@ FinFuncion
         <!-- TAB 6: SIMULADOR DE ESCRITURA -->
         <div id="tab-simulador" class="tab-content">
             <header>
-                <h1>Práctica de Escritura Libre</h1>
-                <p>Escribe tu pseudocódigo y valida la presencia de palabras clave esenciales.</p>
+                <h1>Práctica de Escritura de Pseudocódigo</h1>
+                <p>Escribe tu pseudocódigo libremente y verifica las palabras clave indispensables.</p>
             </header>
 
             <div class="editor-container">
-                <h3>Consigna: Escribe una Función Recursiva para calcular la suma de 1 a N.</h3>
+                <h3>Consigna: Escribe una Función Recursiva para calcular el Factorial de N.</h3>
                 <textarea class="code-input" id="code-editor" placeholder="Escribe tu pseudocódigo aquí..." oninput="validateCode()"></textarea>
 
                 <div class="check-list">
@@ -677,68 +572,112 @@ FinFuncion
     </main>
 
     <script>
-        // BANCO COMPLETO DE 45 PREGUNTAS (15 TEMAS)
+        // BANCO DE 75 PREGUNTAS (5 POR TEMA x 15 TEMAS)
         let questionsData = [
             // TEMA 1
-            { topic: 1, block: "I", q: "¿Qué es un algoritmo y cuáles son sus 3 características fundamentales?", a: "Es un conjunto finito de pasos ordenados y no ambiguos para resolver un problema. Sus 3 características son: Preciso (orden exacto), Definido (mismos datos dan mismo resultado) y Finito (debe terminar)." },
+            { topic: 1, block: "I", q: "¿Qué es un algoritmo y cuáles son sus 3 características fundamentales?", a: "Es un conjunto finito de pasos ordenados y no ambiguos para resolver un problema. Sus 3 características son: Preciso (indica el orden exacto), Definido (mismos datos producen mismo resultado) y Finito (debe terminar)." },
             { topic: 1, block: "I", q: "¿Cuáles son las fases para la resolución de un problema por computadora?", a: "1. Análisis del problema, 2. Diseño del algoritmo, 3. Codificación, 4. Prueba y Depuración, 5. Mantenimiento." },
-            { topic: 1, block: "I", q: "¿Cuál es la diferencia entre datos de Entrada, Proceso y Salida?", a: "Entrada: Datos iniciales. Proceso: Operaciones y transformación. Salida: Resultado final producido." },
+            { topic: 1, block: "I", q: "¿Cuál es la diferencia entre datos de Entrada, Proceso y Salida?", a: "Entrada: Datos iniciales ingresados. Proceso: Operaciones y transformación de los datos. Salida: Resultado final producido." },
+            { topic: 1, block: "I", q: "¿Por qué un algoritmo debe ser ambiguo o no ambiguo?", a: "Debe ser estrictamente NO AMBIGUO para que cada instrucción se interprete de una única manera sin margen a confusión." },
+            { topic: 1, block: "I", q: "¿Qué diferencia existe entre un error de sintaxis y un error de lógica?", a: "Sintaxis: Reglas del lenguaje mal escritas (detectado por compilador). Lógica: El programa corre pero produce resultados incorrectos." },
+
             // TEMA 2
-            { topic: 2, block: "I", q: "¿Qué es el Pseudocódigo y cuál es su ventaja principal?", a: "Lenguaje informal para diseñar algoritmos sin estar sujeto a la sintaxis estricta de un lenguaje de programación específico." },
-            { topic: 2, block: "I", q: "En Diagramas de Flujo, ¿qué representan el Óvalo, Rombo y Paralelogramo?", a: "Óvalo: Inicio/Fin. Rombo: Condición/Decisión. Paralelogramo: Lectura o Impresión de datos." },
-            { topic: 2, block: "I", q: "¿En qué consiste una Prueba de Escritorio (Tabla de Traza)?", a: "Seguimiento manual y ordenado del algoritmo registrando el cambio de variables para verificar si la lógica es correcta." },
+            { topic: 2, block: "I", q: "¿Qué es el Pseudocódigo y cuál es su ventaja principal?", a: "Lenguaje informal de alto nivel para diseñar algoritmos sin estar sujeto a la sintaxis estricta de un lenguaje de programación específico." },
+            { topic: 2, block: "I", q: "En Diagramas de Flujo, ¿qué representan el Óvalo, Rombo y Paralelogramo?", a: "Óvalo: Inicio/Fin. Rombo: Condición/Decisión. Paralelogramo: Lectura de entrada o impresión de salida." },
+            { topic: 2, block: "I", q: "¿En qué consiste una Prueba de Escritorio (Tabla de Traza)?", a: "Seguimiento manual paso a paso registrando el valor de cada variable en una tabla para verificar el funcionamiento correcto." },
+            { topic: 2, block: "I", q: "¿Qué representan las flechas en un diagrama de flujo?", a: "Indican el flujo de control o la secuencia en que deben ejecutarse las instrucciones." },
+            { topic: 2, block: "I", q: "¿Qué es un rectángulo en un diagrama de flujo?", a: "Representa un bloque de proceso u operación matemática (ejemplo: suma <- a + b)." },
+
             // TEMA 3
-            { topic: 3, block: "I", q: "¿Diferencia entre una Variable y una Constante?", a: "Variable: Su valor puede modificar durante la ejecución. Constante: Permanece fija e inalterable durante toda la ejecución." },
+            { topic: 3, block: "I", q: "¿Diferencia entre una Variable y una Constante?", a: "Variable: Espacio en memoria cuyo valor puede cambiar durante la ejecución. Constante: Valor fijo inalterable durante toda la ejecución." },
             { topic: 3, block: "I", q: "¿Qué hace el operador MOD (%) y cuál es su uso típico?", a: "Devuelve el residuo de una división entera. Se usa comúnmente para saber si un número es par (n MOD 2 == 0)." },
-            { topic: 3, block: "I", q: "¿Diferencia entre operadores Relacionales y Lógicos?", a: "Relacionales (>, <, ==): Comparan valores. Lógicos (AND, OR, NOT): Combinan expresiones booleanas." },
+            { topic: 3, block: "I", q: "¿Diferencia entre operadores Relacionales y Lógicos?", a: "Relacionales (>, <, ==): Comparan dos valores numéricos. Lógicos (AND, OR, NOT): Combinan o invierten expresiones booleanas." },
+            { topic: 3, block: "I", q: "¿Qué es un tipo de dato Booleano?", a: "Es un tipo de dato que solo puede tomar uno de dos valores lógicos: Verdadero (True) o Falso (False)." },
+            { topic: 3, block: "I", q: "¿Qué ocurre si no se inicializa una variable antes de sumarle un valor?", a: "Produce un error de variable no inicializada o utiliza basura de memoria, generando un resultado matemático incorrecto." },
+
             // TEMA 4
-            { topic: 4, block: "I", q: "¿Cómo funcionan las tablas de verdad de los operadores Y (AND) y O (OR)?", a: "AND: Devuelve Verdadero si AMBAS condiciones se cumplen. OR: Devuelve Verdadero si AL MENOS UNA condición se cumple." },
-            { topic: 4, block: "I", q: "¿Cuándo se usa una estructura Según Sea (Switch)?", a: "Cuando se evalúa una misma variable discreta contra múltiples valores constantes fijos (como menús)." },
+            { topic: 4, block: "I", q: "¿Cómo funcionan las tablas de verdad de los operadores Y (AND) y O (OR)?", a: "AND: Solo devuelve Verdadero si AMBAS condiciones son verdaderas. OR: Devuelve Verdadero si AL MENOS UNA es verdadera." },
+            { topic: 4, block: "I", q: "¿Cuándo se usa una estructura Según Sea (Switch)?", a: "Cuando se evalúa una misma variable discreta contra múltiples valores constantes fijos (como menús de opciones)." },
             { topic: 4, block: "I", q: "¿Qué es una condición anidada?", a: "Una estructura Si-Entonces ubicada dentro del bloque de ejecución de otra condición Si-Entonces." },
+            { topic: 4, block: "I", q: "¿Para qué sirve el bloque Sino (Else) por defecto?", a: "Ejecuta las instrucciones alternativas cuando ninguna de las condiciones Si previas resultó ser verdadera." },
+            { topic: 4, block: "I", q: "Escribe la expresión lógica para verificar si X está entre 10 y 50 inclusive:", a: "Respuesta: (X >= 10) Y (X <= 50)" },
+
             // TEMA 5
-            { topic: 5, block: "I", q: "¿Diferencia entre bucle Mientras y Repetir-Hasta?", a: "Mientras: Evalúa condición al INICIO (puede ser 0 veces). Repetir-Hasta: Evalúa al FINAL (se ejecuta al menos 1 vez)." },
-            { topic: 5, block: "I", q: "¿Diferencia entre Contador y Acumulador?", a: "Contador: Incrementa por valor constante (c <- c + 1). Acumulador: Suma valores variables (s <- s + monto)." },
-            { topic: 5, block: "I", q: "¿Qué es un bucle infinito y cómo se evita?", a: "Un ciclo que nunca finaliza. Se evita modificando internamente las variables de control dentro del cuerpo del ciclo." },
+            { topic: 5, block: "I", q: "¿Diferencia entre bucle Mientras y Repetir-Hasta?", a: "Mientras: Evalúa la condición al INICIO (puede ser 0 veces). Repetir-Hasta: Evalúa la condición al FINAL (se ejecuta al menos 1 vez)." },
+            { topic: 5, block: "I", q: "¿Diferencia entre Contador y Acumulador?", a: "Contador: Incrementa por una constante fija (c <- c + 1). Acumulador: Suma cantidades variables (s <- s + precio)." },
+            { topic: 5, block: "I", q: "¿Qué es un bucle infinito y cómo se evita?", a: "Ciclo que nunca finaliza. Se evita asegurando que la variable de control cambie su valor dentro del cuerpo del ciclo." },
+            { topic: 5, block: "I", q: "¿Cuándo es obligatorio usar un bucle Para en lugar de Mientras?", a: "Se prefiere el bucle Para cuando la cantidad exacta de iteraciones se conoce de antemano antes de iniciar el ciclo." },
+            { topic: 5, block: "I", q: "¿Qué es el incremento o paso en un bucle Para?", a: "Es el valor constante que se le suma a la variable de control al finalizar cada iteración del bucle." },
+
             // TEMA 6
-            { topic: 6, block: "II", q: "¿En qué consiste el Diseño Descendente (Top-Down)?", a: "Descomponer un problema complejo en subproblemas simples y estructurados jerárquicamente." },
-            { topic: 6, block: "II", q: "¿Diferencia entre Variable Local y Variable Global?", a: "Local: Existe solo dentro de su subalgoritmo. Global: Declarada en el programa principal, accesible por todos." },
-            { topic: 6, block: "II", q: "¿Por qué es una mala práctica abusar de variables globales?", a: "Aumenta el riesgo de efectos secundarios no deseados y dificulta la depuración del código." },
+            { topic: 6, block: "II", q: "¿En qué consiste el Diseño Descendente (Top-Down)?", a: "Descomponer un problema complejo en subproblemas simples ordenados jerárquicamente hasta alcanzar solución básica." },
+            { topic: 6, block: "II", q: "¿Diferencia entre Variable Local y Variable Global?", a: "Local: Declarada dentro de un subalgoritmo, solo existe en él. Global: Declarada en el programa principal, accesible por todos." },
+            { topic: 6, block: "II", q: "¿Por qué es mala práctica abusar de las variables globales?", a: "Destruye la modularidad, dificulta la depuración y aumenta el riesgo de modificaciones no deseadas en otras partes." },
+            { topic: 6, block: "II", q: "¿Qué es el ámbito (scope) de una variable?", a: "Es la región o bloque de código dentro del programa donde una variable es reconocida y puede ser utilizada." },
+            { topic: 6, block: "II", q: "¿Qué es la ocultación de variables (shadowing)?", a: "Ocurre cuando una variable local tiene el mismo nombre que una global, sobrescribiéndola únicamente dentro de su módulo." },
+
             // TEMA 7
-            { topic: 7, block: "II", q: "¿Qué es un Procedimiento?", a: "Subalgoritmo que ejecuta una serie de tareas o instrucciones SIN devolver un valor de retorno." },
-            { topic: 7, block: "II", q: "¿Cómo se invoca un Procedimiento?", a: "Escribiendo su nombre como una línea de instrucción independiente (ej: Llamar MostrarMenu())." },
-            { topic: 7, block: "II", q: "¿Puede un procedimiento modificar variables externas?", a: "Sí, solo si se le pasan dichas variables pasadas como parámetros Por Referencia." },
+            { topic: 7, block: "II", q: "¿Qué es un Procedimiento?", a: "Subalgoritmo que ejecuta una secuencia de tareas específicas SIN devolver ningún valor explícito como resultado de su llamada." },
+            { topic: 7, block: "II", q: "¿Cómo se invoca un Procedimiento en pseudocódigo?", a: "Escribiendo su nombre seguido de sus argumentos como una instrucción independiente (ejemplo: Llamar MostrarMenu())." },
+            { topic: 7, block: "II", q: "¿Puede un procedimiento modificar variables del programa principal?", a: "Sí, siempre y cuando dichas variables hayan sido pasadas como parámetros Por Referencia." },
+            { topic: 7, block: "II", q: "¿Un procedimiento puede recibir parámetros de entrada?", a: "Sí, puede recibir múltiples parámetros por valor o referencia según la tarea que vaya a realizar." },
+            { topic: 7, block: "II", q: "¿Es obligatorio usar la palabra Retornar en un procedimiento?", a: "No, en un procedimiento no se devuelve un valor. La ejecución finaliza al llegar a la última línea o instrucción 'FinProcedimiento'." },
+
             // TEMA 8
-            { topic: 8, block: "II", q: "¿Qué es una Función?", a: "Subalgoritmo que procesa datos de entrada y DEVUELVE OBLIGATORIAMENTE un único resultado." },
-            { topic: 8, block: "II", q: "¿Para qué sirve la sentencia Retornar?", a: "Concluye la ejecución de la función enviando el valor de resultado de regreso a la llamada." },
-            { topic: 8, block: "II", q: "¿Diferencia en llamada de Función vs Procedimiento?", a: "La Función se llama integrada dentro de una expresión o asignación (x <- Calcular()); el Procedimiento en una línea sola." },
+            { topic: 8, block: "II", q: "¿Qué es una Función y cuál es su característica principal?", a: "Subalgoritmo que procesa datos de entrada y DEVUELVE OBLIGATORIAMENTE un único resultado." },
+            { topic: 8, block: "II", q: "¿Para qué sirve la sentencia Retornar / Devolver?", a: "Concluye la ejecución de la función y envía el valor de resultado de regreso al punto de llamada en el programa principal." },
+            { topic: 8, block: "II", q: "¿Diferencia en la llamada de una Función vs Procedimiento?", a: "La Función se llama integrada dentro de una expresión (x <- Calcular()); el Procedimiento se ejecuta en una línea aislada." },
+            { topic: 8, block: "II", q: "¿Puede una función retornar más de un valor a la vez?", a: "No, una función formalmente sólo puede devolver un único valor de resultado a través de la sentencia Retornar." },
+            { topic: 8, block: "II", q: "¿Qué ocurre si una función no ejecuta la instrucción Retornar?", a: "Genera un error sintáctico o de compilación, ya que el punto desde donde fue invocada se queda sin un valor válido." },
+
             // TEMA 9
-            { topic: 9, block: "II", q: "¿Diferencia entre Parámetros Formales y Actuales?", a: "Formales: Variables declaradas en la firma de la función. Actuales: Los datos reales pasados al llamarla." },
-            { topic: 9, block: "II", q: "Paso de Parámetros Por Valor:", a: "Se envía una copia del dato. Los cambios internos NO afectan la variable original." },
-            { topic: 9, block: "II", q: "Paso de Parámetros Por Referencia:", a: "Se envía la dirección de memoria. Los cambios internos modifican DIRECTAMENTE la variable original." },
+            { topic: 9, block: "II", q: "¿Diferencia entre Parámetros Formales y Actuales?", a: "Formales: Las variables definidas en la firma de la función. Actuales: Los valores o variables reales pasados en la llamada." },
+            { topic: 9, block: "II", q: "Explicación exacta de Paso por Valor:", a: "Se envía una copia del dato. Las modificaciones dentro de la función NO alteran la variable original del programa principal." },
+            { topic: 9, block: "II", q: "Explicación exacta de Paso por Referencia:", a: "Se envía la dirección de memoria. Las modificaciones dentro del subalgoritmo alteran DIRECTAMENTE la variable original." },
+            { topic: 9, block: "II", q: "¿Cuándo se debe usar obligatoriamente el paso por referencia?", a: "Cuando se necesita que un subalgoritmo modifique uno o más valores originales recibidos del programa principal." },
+            { topic: 9, block: "II", q: "¿Se puede pasar una constante como parámetro Por Referencia?", a: "No, porque las constantes no tienen una dirección de memoria modificable; sólo variables pueden pasarse Por Referencia." },
+
             // TEMA 10
-            { topic: 10, block: "II", q: "¿Cómo se pasan arreglos a subalgoritmos?", a: "Por Referencia, para no saturar memoria copiando colecciones completas." },
-            { topic: 10, block: "II", q: "¿Qué dato debe acompañar siempre a un arreglo enviado a un subalgoritmo?", a: "Su tamaño o cantidad de elementos activos para evitar accesos fuera de rango." },
-            { topic: 10, block: "II", q: "¿Cómo se busca un elemento en un arreglo dentro de una función?", a: "Recorriendo el arreglo elemento a elemento mediante un bucle comparando con el valor buscado." },
+            { topic: 10, block: "II", q: "¿Cómo se pasan arreglos a subalgoritmos y por qué?", a: "Se pasan Por Referencia para evitar copiar colecciones enteras en memoria, optimizando el rendimiento." },
+            { topic: 10, block: "II", q: "¿Qué dato adicional debe acompañar a un arreglo en un subalgoritmo?", a: "Su tamaño activo de elementos para no acceder a índices fuera de rango." },
+            { topic: 10, block: "II", q: "¿Cómo se busca un elemento en un arreglo dentro de una función?", a: "Recorriendo el arreglo elemento a elemento mediante un bucle e igualando con el valor buscado." },
+            { topic: 10, block: "II", q: "¿Qué es la búsqueda binaria en un arreglo?", a: "Es un algoritmo eficiente que busca dividiendo a la mitad el rango en arreglos previamente ordenados." },
+            { topic: 10, block: "II", q: "¿Cómo se modifica un elemento específico de un arreglo pasado a una función?", a: "Accediendo directamente a su posición por índice (ejemplo: vector[i] <- nuevoValor)." },
+
             // TEMA 11
-            { topic: 11, block: "III", q: "¿Qué es la Recursividad?", a: "Técnica donde una función se llama a sí misma para resolver versiones reducidas del problema original." },
+            { topic: 11, block: "III", q: "¿Qué es la Recursividad?", a: "Técnica donde una función se llama a sí misma para resolver instancias más pequeñas de un mismo problema." },
             { topic: 11, block: "III", q: "¿Cuáles son los 2 componentes de una función recursiva?", a: "1. CASO BASE (condición de parada). 2. CASO RECURSIVO (llamada a sí misma reduciendo el problema)." },
-            { topic: 11, block: "III", q: "¿Qué ocurre sin Caso Base?", a: "Recursión infinita produciendo un desbordamiento de memoria (Stack Overflow)." },
+            { topic: 11, block: "III", q: "¿Qué ocurre si una función recursiva no tiene Caso Base?", a: "Entra en recursión infinita produciendo un desbordamiento de memoria (Stack Overflow)." },
+            { topic: 11, block: "III", q: "¿Por qué el caso recursivo debe reducir siempre el problema?", a: "Para garantizar que con cada llamada el problema se acerque gradualmente al Caso Base y pueda finalizar." },
+            { topic: 11, block: "III", q: "¿Puede haber más de un Caso Base en una función recursiva?", a: "Sí, como en la serie de Fibonacci, donde se definen dos casos base: F(0) = 0 y F(1) = 1." },
+
             // TEMA 12
-            { topic: 12, block: "III", q: "¿Qué es la Pila de Llamadas (Call Stack)?", a: "Estructura LIFO en memoria que gestiona las funciones activas pendientes de completar." },
-            { topic: 12, block: "III", q: "¿Qué es un Registro de Activación?", a: "Espacio reservado en la pila al llamar una función para almacenar sus variables locales y parámetros." },
-            { topic: 12, block: "III", q: "¿Cómo ocurre un Stack Overflow?", a: "Cuando el número de llamadas recursivas sobrepasa el espacio disponible de la pila por falta de caso base." },
+            { topic: 12, block: "III", q: "¿Qué es la Pila de Llamadas (Call Stack)?", a: "Estructura LIFO (Last In, First Out) en memoria que guarda las funciones activas pendientes de completar." },
+            { topic: 12, block: "III", q: "¿Qué es un Registro de Activación?", a: "Bloque reservado en la pila al llamar una función para almacenar sus variables locales, parámetros y dirección de retorno." },
+            { topic: 12, block: "III", q: "¿Cómo se produce un error de Stack Overflow?", a: "Cuando el número de llamadas recursivas sobrepasa el límite de memoria disponible de la pila por falta de caso base." },
+            { topic: 12, block: "III", q: "¿Qué operación de pila ocurre cuando una función termina?", a: "Ocurre una operación de Pop (Desapilar): su registro de activación se elimina de la memoria." },
+            { topic: 12, block: "III", q: "¿Qué se guarda en la dirección de retorno de un registro de activación?", a: "La línea exacta de código a la cual debe volver el flujo de control una vez que la función invocada termine." },
+
             // TEMA 13
             { topic: 13, block: "III", q: "¿Diferencia entre Recursión Directa e Indirecta?", a: "Directa: A se llama a A. Indirecta: A llama a B, y B vuelve a llamar a A." },
-            { topic: 13, block: "III", q: "¿Qué es la Recursividad de Cola (Tail Recursion)?", a: "Cuando la llamada recursiva es la última instrucción ejecutada antes de retornar." },
-            { topic: 13, block: "III", q: "¿Por qué optimiza el compilador la recursión de cola?", a: "Permite reutilizar el mismo registro de activación evitando sobrecargar la pila." },
+            { topic: 13, block: "III", q: "¿Qué es la Recursividad de Cola (Tail Recursion)?", a: "Ocurre cuando la llamada recursiva es la última instrucción ejecutada antes de retornar sin operaciones pendientes." },
+            { topic: 13, block: "III", q: "¿Por qué optimiza el compilador la recursión de cola?", a: "Reutiliza el mismo registro de activación evitando sobrecargar la pila de memoria." },
+            { topic: 13, block: "III", q: "¿Qué es la recursividad no final (no de cola)?", a: "Es cuando tras la llamada recursiva quedan operaciones matemáticas o lógicas pendientes por resolver." },
+            { topic: 13, block: "III", q: "¿Se puede convertir cualquier función recursiva a iterativa?", a: "Sí, todo algoritmo recursivo puede ser transformado en un algoritmo iterativo utilizando bucles y pilas manuales." },
+
             // TEMA 14
-            { topic: 14, block: "III", q: "Factorial Recursivo (n!):", a: "Caso Base: Factorial(0) = 1. Caso Recursivo: Factorial(n) = n * Factorial(n - 1)." },
-            { topic: 14, block: "III", q: "Fibonacci Recursivo (Fn):", a: "Casos Base: F(0)=0, F(1)=1. Caso Recursivo: F(n) = F(n-1) + F(n-2)." },
-            { topic: 14, block: "III", q: "Torres de Hanói:", a: "Mover N discos entre torres sin colocar uno grande sobre uno pequeño. Requiere 2^n - 1 movimientos." },
+            { topic: 14, block: "III", q: "Definición matemática recursiva del Factorial (n!):", a: "Caso Base: Factorial(0) = 1. Caso Recursivo: Factorial(n) = n * Factorial(n - 1) para n > 0." },
+            { topic: 14, block: "III", q: "Definición matemática recursiva de Fibonacci (Fn):", a: "Casos Base: F(0)=0, F(1)=1. Caso Recursivo: F(n) = F(n-1) + F(n-2) para n > 1." },
+            { topic: 14, block: "III", q: "¿En qué consiste el problema de las Torres de Hanói?", a: "Mover N discos entre torres respetando que un disco mayor nunca quede sobre uno menor. Requiere 2^n - 1 movimientos." },
+            { topic: 14, block: "III", q: "¿Cuál es el caso base en el algoritmo de búsqueda binaria recursiva?", a: "Cuando el índice de inicio supera al índice final (elemento no encontrado) o cuando el elemento central coincide." },
+            { topic: 14, block: "III", q: "Escribe la condición de parada (Caso Base) para contar dígitos de un número N de forma recursiva:", a: "Si N < 10 Entonces Retornar 1 (solo tiene un dígito)." },
+
             // TEMA 15
-            { topic: 15, block: "III", q: "¿Qué es la Notación Big-O?", a: "Medida matemática de complejidad para evaluar el tiempo o memoria consumida según la entrada N." },
-            { topic: 15, block: "III", q: "Recursividad vs Iteración:", a: "Recursividad: Código más claro en estructuras complejas, mayor uso de memoria. Iteración: Más rápida y limpia en consumo de memoria." },
-            { topic: 15, block: "III", q: "¿Cuándo convertir de recursivo a iterativo?", a: "Cuando el rendimiento sea crítico o las llamadas recursivas sean masivas para evitar Stack Overflow." }
+            { topic: 15, block: "III", q: "¿Qué es la Notación Big-O (O)?", a: "Medida matemática para describir la complejidad temporal (tiempo) o espacial (memoria) de un algoritmo según N." },
+            { topic: 15, block: "III", q: "Recursividad vs Iteración (Comparativa):", a: "Recursividad: Código más claro en estructuras complejas, pero mayor uso de memoria. Iteración: Más rápida y limpia en memoria." },
+            { topic: 15, block: "III", q: "¿Cuándo se debe transformar un algoritmo recursivo a uno iterativo?", a: "Cuando el rendimiento sea crítico o la profundidad de llamadas recursivas sea masiva arriesgando un Stack Overflow." },
+            { topic: 15, block: "III", q: "¿Cuál es la complejidad temporal O() de la serie de Fibonacci recursiva simple?", a: "Tiene una complejidad exponencial O(2^n), siendo ineficiente para valores grandes de N sin memorización." },
+            { topic: 15, block: "III", q: "¿Qué es la complejidad espacial en notación Big-O?", a: "Es la cantidad máxima de memoria adicional que requiere un algoritmo para ejecutarse según el tamaño de la entrada." }
         ];
 
         const bugData = [
@@ -792,8 +731,6 @@ FinFuncion
             
             document.getElementById(`tab-${tabId}`).classList.add('active');
             event.currentTarget.classList.add('active');
-
-            // Cerrar menu mobile al hacer clic en un item
             document.getElementById('main-menu').classList.remove('open');
         }
 
