@@ -1,959 +1,859 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Master en Algoritmos - Preparador de Examen Completo (45 Preguntas)</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            50: '#f0f7ff',
-                            100: '#e0effe',
-                            500: '#0284c7',
-                            600: '#0369a1',
-                            700: '#075985',
-                            900: '#0c4a6e',
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- FontAwesome icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Master de Algoritmos, Subalgoritmos y Recursividad - Preparación para Examen</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
-        .perspective-1000 { perspective: 1000px; }
-        .transform-style-3d { transform-style: preserve-3d; }
-        .backface-hidden { backface-visibility: hidden; }
-        .rotate-y-180 { transform: rotateY(180deg); }
-        .stack-item-enter { animation: slideIn 0.3s ease-out forwards; }
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+        :root {
+            --bg-dark: #0f172a;
+            --panel-bg: #1e293b;
+            --card-bg: #334155;
+            --accent-blue: #38bdf8;
+            --accent-green: #4ade80;
+            --accent-purple: #c084fc;
+            --accent-red: #f87171;
+            --accent-yellow: #facc15;
+            --text-light: #f8fafc;
+            --text-muted: #94a3b8;
+            --border: #475569;
         }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* Sidebar Navigation */
+        sidebar {
+            width: 260px;
+            background-color: #0b1120;
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 20px 0;
+            flex-shrink: 0;
+        }
+
+        .brand {
+            padding: 0 20px 20px 20px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .brand i {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+        }
+
+        .brand h2 {
+            font-size: 1.1rem;
+            line-height: 1.2;
+        }
+
+        .brand span {
+            color: var(--accent-blue);
+        }
+
+        .menu-list {
+            list-style: none;
+            margin-top: 20px;
+            overflow-y: auto;
+        }
+
+        .menu-item {
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-weight: 500;
+        }
+
+        .menu-item:hover, .menu-item.active {
+            background-color: var(--panel-bg);
+            color: var(--text-light);
+            border-left: 4px solid var(--accent-blue);
+        }
+
+        .menu-item i {
+            width: 20px;
+            text-align: center;
+        }
+
+        /* Main Content Area */
+        main {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding: 30px;
+            background-color: var(--bg-dark);
+        }
+
+        .tab-content {
+            display: none;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        header {
+            margin-bottom: 25px;
+        }
+
+        header h1 {
+            font-size: 1.8rem;
+            color: var(--accent-blue);
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: var(--text-muted);
+        }
+
+        /* Filter Controls */
+        .controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .select-box, .btn {
+            background-color: var(--panel-bg);
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .select-box:focus, .btn:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .btn-primary {
+            background-color: #0284c7;
+            border-color: #0284c7;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background-color: #0369a1;
+        }
+
+        /* Cards Grid */
+        .grid-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 220px;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: var(--accent-blue);
+        }
+
+        .card-tag {
+            align-self: flex-start;
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 20px;
+            background-color: var(--card-bg);
+            color: var(--accent-blue);
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card-q {
+            font-weight: 600;
+            font-size: 1.05rem;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .card-a {
+            background-color: var(--bg-dark);
+            border-radius: 8px;
+            padding: 12px;
+            font-size: 0.9rem;
+            color: var(--accent-green);
+            display: none;
+            margin-top: auto;
+            border-left: 3px solid var(--accent-green);
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Cheatsheet Formulas */
+        .formula-box {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .formula-box h3 {
+            color: var(--accent-purple);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        pre {
+            background-color: #090d16;
+            padding: 15px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #38bdf8;
+            overflow-x: auto;
+            border: 1px solid #1e293b;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Doctor del codigo (Bug Finder) */
+        .bug-card {
+            background-color: var(--panel-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .bug-options {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .option-btn {
+            background-color: var(--card-bg);
+            border: 1px solid var(--border);
+            color: var(--text-light);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .option-btn:hover {
+            border-color: var(--accent-yellow);
+        }
+
+        .feedback {
+            margin-top: 15px;
+            padding: 12px;
+            border-radius: 8px;
+            display: none;
+            font-weight: 600;
+        }
+
+        .feedback.correct {
+            background-color: rgba(74, 222, 128, 0.15);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        .feedback.incorrect {
+            background-color: rgba(248, 113, 113, 0.15);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }
+
+        /* Pila visual stack */
+        .stack-visualizer {
+            display: flex;
+            gap: 30px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .stack-container {
+            flex: 1;
+            min-width: 280px;
+            background-color: var(--panel-bg);
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            height: 350px;
+            display: flex;
+            flex-direction: column-reverse;
+            padding: 15px;
+            gap: 10px;
+            overflow-y: auto;
+        }
+
+        .stack-frame {
+            background-color: var(--card-bg);
+            border: 1px solid var(--accent-blue);
+            color: var(--text-light);
+            padding: 12px;
+            border-radius: 8px;
+            text-align: center;
+            font-family: monospace;
+            animation: pushAnim 0.3s ease-out;
+        }
+
+        @keyframes pushAnim {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .stack-controls {
+            flex: 1;
+            min-width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        /* Editor de codigo interactivo */
+        .editor-container {
+            background-color: var(--panel-bg);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            padding: 20px;
+        }
+
+        textarea.code-input {
+            width: 100%;
+            height: 250px;
+            background-color: #090d16;
+            color: var(--text-light);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 15px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            resize: vertical;
+            outline: none;
+            margin-top: 10px;
+        }
+
+        textarea.code-input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .check-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .check-item {
+            background-color: var(--card-bg);
+            padding: 8px 12px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .check-item.valid { color: var(--accent-green); }
+        .check-item.invalid { color: var(--text-muted); }
+
     </style>
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans flex flex-col">
+<body>
 
-    <!-- Header & Navigation -->
-    <header class="border-b border-slate-800 bg-slate-950/90 backdrop-blur sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex flex-wrap items-center justify-between gap-4">
-            <div class="flex items-center space-x-3">
-                <div class="bg-brand-600 text-white p-2.5 rounded-xl shadow-lg shadow-brand-500/20">
-                    <i class="fa-solid fa-graduation-cap text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-lg leading-tight text-white">Algoritmos Master • 45 Preguntas & 15 Temas</h1>
-                    <p class="text-xs text-slate-400">Preparación Intensiva de 3 Días para Examen Escrito a Mano</p>
+    <sidebar>
+        <div class="brand">
+            <i class="fa-solid fa-brain"></i>
+            <h2>Master en <span>Algoritmos</span></h2>
+        </div>
+        <ul class="menu-list">
+            <li class="menu-item active" onclick="switchTab('teoria')">
+                <i class="fa-solid fa-book"></i> 45 Preguntas Teóricas
+            </li>
+            <li class="menu-item" onclick="switchTab('formulas')">
+                <i class="fa-solid fa-code"></i> Fórmulas de Sintaxis
+            </li>
+            <li class="menu-item" onclick="switchTab('doctor')">
+                <i class="fa-solid fa-user-md"></i> Doctor del Código
+            </li>
+            <li class="menu-item" onclick="switchTab('pila')">
+                <i class="fa-solid fa-layer-group"></i> Pila Recursiva (Stack)
+            </li>
+            <li class="menu-item" onclick="switchTab('simulador')">
+                <i class="fa-solid fa-pen-to-square"></i> Práctica de Escritura
+            </li>
+        </ul>
+    </sidebar>
+
+    <main>
+        <!-- TAB 1: TEORIA 45 PREGUNTAS -->
+        <div id="tab-teoria" class="tab-content active">
+            <header>
+                <h1>45 Preguntas de Examen (Desarrollo Teórico)</h1>
+                <p>Haz clic en cualquier tarjeta para ver la respuesta exacta de examen.</p>
+            </header>
+
+            <div class="controls">
+                <select id="filter-block" class="select-box" onchange="filterQuestions()">
+                    <option value="all">Todos los Bloques</option>
+                    <option value="I">Bloque I: Fundamentos y Bucles</option>
+                    <option value="II">Bloque II: Subalgoritmos</option>
+                    <option value="III">Bloque III: Recursividad</option>
+                </select>
+
+                <select id="filter-topic" class="select-box" onchange="filterQuestions()">
+                    <option value="all">Todos los Temas (1 al 15)</option>
+                </select>
+            </div>
+
+            <div class="grid-cards" id="questions-grid">
+                <!-- Se llena dinamicamente -->
+            </div>
+        </div>
+
+        <!-- TAB 2: FORMULAS DE SINTAXIS -->
+        <div id="tab-formulas" class="tab-content">
+            <header>
+                <h1>Fórmulas de Pseudocódigo para Memorizar</h1>
+                <p>Estructuras estándar que debes escribir exactamente igual en tu examen escrito a mano.</p>
+            </header>
+
+            <div class="formula-box">
+                <h3><i class="fa-solid fa-code-branch"></i> 1. Estructura Condicional Completa (`Si - Sino`)</h3>
+<pre>
+Si (condicion_1) Entonces
+    // Bloque si se cumple condicion 1
+Sino Si (condicion_2) Entonces
+    // Bloque si se cumple condicion 2
+Sino
+    // Bloque por defecto
+FinSi
+</pre>
+            </div>
+
+            <div class="formula-box">
+                <h3><i class="fa-solid fa-arrows-spin"></i> 2. Bucles (`Para` y `Mientras`)</h3>
+<pre>
+// Bucle PARA (Cantidad de iteraciones conocida)
+Para i <- 1 Hasta N Con Paso 1 Hacer
+    // Codigo a repetir N veces
+FinPara
+
+// Bucle MIENTRAS (Condición al inicio)
+Mientras (condicion) Hacer
+    // Codigo a repetir
+    i <- i + 1  // ¡OBLIGATORIO: Avanzar la variable de control!
+FinMientras
+</pre>
+            </div>
+
+            <div class="formula-box">
+                <h3><i class="fa-solid fa-cubes"></i> 3. Subalgoritmos (Función vs Procedimiento)</h3>
+<pre>
+// FUNCIÓN: Procesa datos y DEVUELVE UN VALOR
+Funcion Entero CalcularSuma(Entero a, Entero b)
+    Entero resultado
+    resultado <- a + b
+    Retornar resultado  // ¡OBLIGATORIO!
+FinFuncion
+
+// PROCEDIMIENTO: Ejecuta acciones SIN devolver valor
+Procedimiento ImprimirMensaje(Cadena texto)
+    Escribir "MENSAJE: ", texto
+FinProcedimiento
+</pre>
+            </div>
+
+            <div class="formula-box">
+                <h3><i class="fa-solid fa-rotate-left"></i> 4. Esqueleto Universal de Recursividad</h3>
+<pre>
+Funcion Entero CalcularFactorial(Entero n)
+    // 1. CASO BASE (Condición de parada que rompe la recursión)
+    Si (n <= 1) Entonces
+        Retornar 1
+    Sino
+        // 2. CASO RECURSIVO (Se llama a sí misma reduciendo el problema)
+        Retornar n * CalcularFactorial(n - 1)
+    FinSi
+FinFuncion
+</pre>
+            </div>
+        </div>
+
+        <!-- TAB 3: DOCTOR DEL CODIGO -->
+        <div id="tab-doctor" class="tab-content">
+            <header>
+                <h1>El Doctor del Código (Encuentra el Error)</h1>
+                <p>Entrena tu ojo para identificar los fallos más castigados en exámenes escritos a mano.</p>
+            </header>
+
+            <div id="bugs-container">
+                <!-- Se llena con preguntas de deteccion de errores -->
+            </div>
+        </div>
+
+        <!-- TAB 4: PILA RECURSIVA VISUAL -->
+        <div id="tab-pila" class="tab-content">
+            <header>
+                <h1>Simulador de Pila de Llamadas (Call Stack)</h1>
+                <p>Observa cómo la memoria apila llamadas recursivas hasta tocar el Caso Base y luego desapila devolviendo valores.</p>
+            </header>
+
+            <div class="formula-box">
+                <h3>Función bajo prueba: <code>Factorial(N)</code></h3>
+                <div style="display: flex; gap: 10px; margin-top: 10px;">
+                    <button class="btn btn-primary" onclick="pushStack()">Ejecutar Llamada (Push)</button>
+                    <button class="btn" onclick="popStack()">Resolver/Desapilar (Pop)</button>
+                    <button class="btn" style="background-color: var(--accent-red); border:none;" onclick="resetStack()">Reiniciar</button>
                 </div>
             </div>
 
-            <!-- Global Score Tracker -->
-            <div class="flex items-center space-x-6">
-                <div class="bg-slate-900 border border-slate-800 px-4 py-1.5 rounded-lg flex items-center space-x-3">
-                    <div class="text-xs">
-                        <span class="text-slate-400 block">Dominio Total (45 Preguntas)</span>
-                        <span id="overall-progress-text" class="font-bold text-brand-500">0%</span>
-                    </div>
-                    <div class="w-28 bg-slate-800 h-2.5 rounded-full overflow-hidden">
-                        <div id="overall-progress-bar" class="bg-brand-500 h-full w-0 transition-all duration-500"></div>
+            <div class="stack-visualizer">
+                <div class="stack-container" id="stack-box">
+                    <!-- Se apilan elementos aca -->
+                </div>
+                <div class="stack-controls">
+                    <div class="formula-box" style="height: 100%;">
+                        <h3>Estado de la Memoria</h3>
+                        <p id="stack-status" style="color: var(--text-muted); margin-top: 10px;">
+                            Haz clic en "Ejecutar Llamada" para iniciar la simulación con N = 4.
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <nav class="max-w-7xl mx-auto px-4 flex space-x-2 border-t border-slate-800/60 overflow-x-auto text-sm">
-            <button onclick="switchTab('flashcards')" id="tab-btn-flashcards" class="tab-btn active px-4 py-2.5 font-medium border-b-2 border-brand-500 text-brand-500 flex items-center space-x-2 whitespace-nowrap">
-                <i class="fa-solid fa-layer-group"></i>
-                <span>1. Teoría (45 Preguntas / 15 Temas)</span>
-            </button>
-            <button onclick="switchTab('quiz')" id="tab-btn-quiz" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
-                <i class="fa-solid fa-bolt"></i>
-                <span>2. Test Rápido Aleatorio</span>
-            </button>
-            <button onclick="switchTab('pseudocode')" id="tab-btn-pseudocode" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
-                <i class="fa-solid fa-code"></i>
-                <span>3. Pseudocódigo a Mano</span>
-            </button>
-            <button onclick="switchTab('stack')" id="tab-btn-stack" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
-                <i class="fa-solid fa-cubes"></i>
-                <span>4. Visor Pila Recursiva</span>
-            </button>
-            <button onclick="switchTab('plan')" id="tab-btn-plan" class="tab-btn px-4 py-2.5 font-medium border-b-2 border-transparent text-slate-400 hover:text-slate-200 flex items-center space-x-2 whitespace-nowrap">
-                <i class="fa-solid fa-calendar-check"></i>
-                <span>5. Plan de 3 Días</span>
-            </button>
-        </nav>
-    </header>
+        <!-- TAB 5: SIMULADOR DE ESCRITURA -->
+        <div id="tab-simulador" class="tab-content">
+            <header>
+                <h1>Práctica de Escritura de Pseudocódigo</h1>
+                <p>Escribe tu código a mano digitalmente y verifica que no olvides palabras clave obligatorias.</p>
+            </header>
 
-    <!-- Main Content Area -->
-    <main class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6">
+            <div class="editor-container">
+                <h3>Consigna: Escribe una Función Recursiva para calcular la suma de 1 a N.</h3>
+                <textarea class="code-input" id="code-editor" placeholder="Escribe tu pseudocódigo aquí..." oninput="validateCode()"></textarea>
 
-        <!-- TAB 1: FLASHCARDS TEORÍA EXHAUSTIVA (45 PREGUNTAS) -->
-        <section id="tab-flashcards" class="tab-content block space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-800/40 border border-slate-800 p-4 rounded-xl">
-                <div>
-                    <h2 class="text-lg font-bold text-white flex items-center gap-2">
-                        <span>45 Preguntas Teóricas del Temario Oficial</span>
-                    </h2>
-                    <p class="text-xs text-slate-400 mt-1">Filtra por Bloque o por cualquiera de los 15 Temas. Haz clic en la tarjeta para revelar la respuesta y evalúa tu desempeño.</p>
-                </div>
-                <div class="flex flex-wrap items-center gap-2">
-                    <button onclick="filterBlock('all')" class="mod-filter-btn active text-xs px-3 py-1.5 rounded-lg bg-brand-600 text-white font-medium">Todos (45)</button>
-                    <button onclick="filterBlock(1)" class="mod-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Bloque I (Temas 1-5)</button>
-                    <button onclick="filterBlock(2)" class="mod-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Bloque II (Temas 6-10)</button>
-                    <button onclick="filterBlock(3)" class="mod-filter-btn text-xs px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Bloque III (Temas 11-15)</button>
+                <div class="check-list">
+                    <div class="check-item invalid" id="chk-func"><i class="fa-solid fa-circle-check"></i> Palabra 'Funcion'</div>
+                    <div class="check-item invalid" id="chk-si"><i class="fa-solid fa-circle-check"></i> Condicional 'Si'</div>
+                    <div class="check-item invalid" id="chk-finsi"><i class="fa-solid fa-circle-check"></i> Cierre 'FinSi'</div>
+                    <div class="check-item invalid" id="chk-retornar"><i class="fa-solid fa-circle-check"></i> Sentencia 'Retornar'</div>
+                    <div class="check-item invalid" id="chk-finfunc"><i class="fa-solid fa-circle-check"></i> Cierre 'FinFuncion'</div>
                 </div>
             </div>
-
-            <!-- Topic Selector Dropdown -->
-            <div class="flex items-center space-x-3 bg-slate-900 border border-slate-800 p-3 rounded-xl">
-                <label class="text-xs text-slate-400 font-medium whitespace-nowrap"><i class="fa-solid fa-filter text-brand-400 mr-1"></i>Filtrar por Tema específico:</label>
-                <select id="topic-select-dropdown" onchange="filterTopic(this.value)" class="bg-slate-800 border border-slate-700 text-xs text-slate-200 rounded-lg p-2 w-full focus:ring-2 focus:ring-brand-500">
-                    <option value="all">Ver los 15 Temas (Todos)</option>
-                    <option value="1">Tema 1: Introducción a la Algoritmia</option>
-                    <option value="2">Tema 2: Representación de Algoritmos</option>
-                    <option value="3">Tema 3: Tipos de Datos, Variables y Operadores</option>
-                    <option value="4">Tema 4: Estructuras Selectivas</option>
-                    <option value="5">Tema 5: Estructuras Repetitivas (Iteración)</option>
-                    <option value="6">Tema 6: Modularidad y Diseño Descendente</option>
-                    <option value="7">Tema 7: Procedimientos</option>
-                    <option value="8">Tema 8: Funciones</option>
-                    <option value="9">Tema 9: Paso de Parámetros</option>
-                    <option value="10">Tema 10: Arreglos y Subalgoritmos</option>
-                    <option value="11">Tema 11: Introducción a la Recursividad</option>
-                    <option value="12">Tema 12: La Pila de Llamadas (Call Stack)</option>
-                    <option value="13">Tema 13: Tipos de Recursividad</option>
-                    <option value="14">Tema 14: Algoritmos Recursivos Clásicos</option>
-                    <option value="15">Tema 15: Comparativa y Eficiencia (Big-O)</option>
-                </select>
-            </div>
-
-            <!-- Flashcard Display Container -->
-            <div class="max-w-3xl mx-auto">
-                <div class="flex justify-between items-center text-xs text-slate-400 mb-2 px-1">
-                    <span id="card-counter">Tarjeta 1 de 45</span>
-                    <div class="flex gap-2">
-                        <span id="card-topic-badge" class="px-2.5 py-0.5 rounded bg-brand-900/60 text-brand-300 font-semibold border border-brand-700/50">Tema 1</span>
-                        <span id="card-mastery-badge" class="px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700">Sin revisar</span>
-                    </div>
-                </div>
-
-                <!-- Card Structure -->
-                <div id="flashcard-element" onclick="flipCard()" class="perspective-1000 cursor-pointer min-h-[300px]">
-                    <div id="flashcard-inner" class="relative w-full h-full min-h-[300px] rounded-2xl bg-slate-800 border border-slate-700/80 p-6 flex flex-col justify-between shadow-xl transition-transform duration-500 transform-style-3d">
-                        
-                        <!-- Front Face -->
-                        <div id="card-front" class="w-full flex flex-col justify-between h-full space-y-4">
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs font-semibold text-brand-400 tracking-wider uppercase">Pregunta de Examen Escrito</span>
-                                <i class="fa-solid fa-rotate text-slate-500 hover:text-slate-300 text-sm"></i>
-                            </div>
-                            <div class="my-auto text-center py-6">
-                                <h3 id="card-question-text" class="text-lg sm:text-xl font-semibold text-slate-100 leading-snug">
-                                    Cargando pregunta...
-                                </h3>
-                            </div>
-                            <p class="text-center text-xs text-slate-500 italic">Haz clic aquí para voltear la tarjeta y ver la respuesta esperada</p>
-                        </div>
-
-                        <!-- Back Face -->
-                        <div id="card-back" class="absolute inset-0 w-full h-full rounded-2xl bg-slate-800 border border-brand-500/40 p-6 flex flex-col justify-between rotate-y-180 backface-hidden bg-gradient-to-b from-slate-800 to-slate-900 overflow-y-auto">
-                            <div class="flex justify-between items-start">
-                                <span class="text-xs font-semibold text-emerald-400 tracking-wider uppercase">Respuesta Exacta para Examen</span>
-                                <span class="text-xs text-slate-400">Criterio del Profesor</span>
-                            </div>
-                            <div class="my-auto py-2">
-                                <div id="card-answer-text" class="text-xs sm:text-sm text-slate-200 leading-relaxed space-y-2">
-                                    <!-- Answer HTML -->
-                                </div>
-                            </div>
-                            <p class="text-center text-xs text-slate-500 italic">Evalúa tu respuesta con los botones de abajo</p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <!-- Card Navigation & Self Assessment -->
-                <div class="mt-6 flex flex-col space-y-3">
-                    <div class="flex justify-between items-center gap-3">
-                        <button onclick="prevCard()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold">
-                            <i class="fa-solid fa-arrow-left mr-1"></i> Anter.
-                        </button>
-                        <div class="flex flex-1 justify-center space-x-2">
-                            <button onclick="rateCard('wrong')" class="flex-1 bg-red-950/40 hover:bg-red-900/60 border border-red-800/60 text-red-300 py-2.5 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center space-x-1.5">
-                                <i class="fa-solid fa-xmark"></i>
-                                <span>Revisar</span>
-                            </button>
-                            <button onclick="rateCard('doubt')" class="flex-1 bg-amber-950/40 hover:bg-amber-900/60 border border-amber-800/60 text-amber-300 py-2.5 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center space-x-1.5">
-                                <i class="fa-solid fa-triangle-exclamation"></i>
-                                <span>Dudé</span>
-                            </button>
-                            <button onclick="rateCard('perfect')" class="flex-1 bg-emerald-950/40 hover:bg-emerald-900/60 border border-emerald-800/60 text-emerald-300 py-2.5 px-3 rounded-xl text-xs font-semibold transition flex items-center justify-center space-x-1.5">
-                                <i class="fa-solid fa-check"></i>
-                                <span>Dominado</span>
-                            </button>
-                        </div>
-                        <button onclick="nextCard()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 px-4 py-2 rounded-xl text-xs font-semibold">
-                            Sig. <i class="fa-solid fa-arrow-right ml-1"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 2: TEST RÁPIDO ALEATORIO -->
-        <section id="tab-quiz" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800/40 border border-slate-800 p-4 rounded-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
-                <div>
-                    <h2 class="text-lg font-bold text-white">Simulacro de Examen Rápido (5 Preguntas Aleatorias)</h2>
-                    <p class="text-xs text-slate-400 mt-1">Genera un test rápido con preguntas de desarrollo al azar de cualquiera de los 15 temas.</p>
-                </div>
-                <button onclick="generateQuickQuiz()" class="bg-brand-600 hover:bg-brand-500 text-white text-xs font-semibold px-4 py-2 rounded-xl shadow-lg shadow-brand-600/30">
-                    <i class="fa-solid fa-shuffle mr-1.5"></i> Generar Nuevo Test
-                </button>
-            </div>
-
-            <div id="quiz-container" class="space-y-4 max-w-4xl mx-auto">
-                <!-- Quiz items loaded dynamically -->
-            </div>
-        </section>
-
-        <!-- TAB 3: PSEUDOCÓDIGO EN BLANCO Y CHECKLIST -->
-        <section id="tab-pseudocode" class="tab-content hidden space-y-6">
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-slate-800/40 border border-slate-800 p-4 rounded-xl">
-                <div>
-                    <h2 class="text-lg font-bold text-white">Reto de Autocompletar Pseudocódigo a Mano</h2>
-                    <p class="text-xs text-slate-400 mt-1">Escribe la palabra clave u operador exacto en los espacios en blanco para asegurar sintaxis limpia en examen.</p>
-                </div>
-                <div id="code-exercise-selector" class="flex flex-wrap gap-2">
-                    <!-- Exercise buttons populated dynamically -->
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Editor / Challenge Panel -->
-                <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-xl p-5 shadow-2xl flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
-                            <h3 id="exercise-title" class="font-bold text-brand-400 text-sm sm:text-base">Ejercicio</h3>
-                            <span id="exercise-difficulty" class="text-xs px-2.5 py-1 rounded bg-amber-950/60 text-amber-300 border border-amber-800">Dificultad: Media</span>
-                        </div>
-                        <p id="exercise-instructions" class="text-xs text-slate-300 mb-4 bg-slate-900 p-3 rounded-lg border border-slate-800">
-                            Instrucciones...
-                        </p>
-
-                        <!-- Code Area -->
-                        <div id="pseudocode-container" class="font-mono text-xs sm:text-sm leading-relaxed text-slate-200 bg-slate-900 p-4 rounded-xl border border-slate-800 space-y-2 overflow-x-auto">
-                            <!-- Code lines dynamically generated -->
-                        </div>
-                    </div>
-
-                    <!-- Actions & Verification -->
-                    <div class="mt-6 flex flex-wrap justify-between items-center gap-3 pt-4 border-t border-slate-800">
-                        <button onclick="resetCurrentCodeExercise()" class="text-xs text-slate-400 hover:text-white px-3 py-2 rounded bg-slate-800">
-                            <i class="fa-solid fa-rotate-left mr-1"></i> Reiniciar
-                        </button>
-                        <button onclick="verifyCodeExercise()" class="bg-brand-600 hover:bg-brand-500 text-white font-semibold text-xs px-6 py-2.5 rounded-lg shadow-lg shadow-brand-600/30 transition">
-                            <i class="fa-solid fa-square-check mr-1.5"></i> Verificar Pseudocódigo
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Feedback & Checklist Side Panel -->
-                <div class="space-y-4">
-                    <!-- Status Feedback Box -->
-                    <div id="code-feedback-box" class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4">
-                        <h4 class="text-xs font-bold uppercase text-slate-400 tracking-wider mb-2">Resultado del Análisis</h4>
-                        <div id="code-feedback-content" class="text-xs text-slate-300 space-y-2">
-                            <p class="italic text-slate-500">Rellena los espacios vacíos y haz clic en "Verificar Pseudocódigo".</p>
-                        </div>
-                    </div>
-
-                    <!-- Checklist for written exam -->
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 space-y-3">
-                        <h4 class="text-xs font-bold text-amber-400 flex items-center gap-1.5">
-                            <i class="fa-solid fa-list-check"></i>
-                            <span>Checklist para Examen Escrito</span>
-                        </h4>
-                        <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside">
-                            <li><strong class="text-slate-100">Cierre de Estructuras:</strong> Revisa que cada <code class="text-brand-400">Si</code> tenga su <code class="text-brand-400">FinSi</code> y cada bucle su <code class="text-brand-400">FinPara/FinMientras</code>.</li>
-                            <li><strong class="text-slate-100">Inicialización:</strong> ¿Escribiste <code class="text-brand-400">suma <- 0</code> antes de entrar al bucle?</li>
-                            <li><strong class="text-slate-100">Retorno explícito:</strong> Toda función requiere <code class="text-brand-400">Retornar resultado</code>.</li>
-                            <li><strong class="text-slate-100">Paso por Referencia:</strong> Antepone <code class="text-brand-400">Por Referencia</code> en parámetros que deban modificarse fuera.</li>
-                            <li><strong class="text-slate-100">Caso Base:</strong> Colócalo al inicio de la función recursiva antes de llamar a sí misma.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 4: VISOR DE PILA RECURSIVA (CALL STACK) -->
-        <section id="tab-stack" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800/40 border border-slate-800 p-4 rounded-xl">
-                <h2 class="text-lg font-bold text-white">Simulador Interactivo de Pila de Llamadas (Call Stack)</h2>
-                <p class="text-xs text-slate-400 mt-1">Observa cómo la memoria apila los registros de activación (PUSH) hasta el **Caso Base**, y luego desapila (POP) retornando el valor acumulado.</p>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <!-- Controls & Code Display -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-                    <h3 class="font-bold text-slate-200 text-sm">Función Recursiva: Factorial(N)</h3>
-                    
-                    <div class="font-mono text-xs bg-slate-950 p-4 rounded-xl border border-slate-800 leading-relaxed text-slate-300">
-                        <p class="text-purple-400">Funcion Factorial(n)</p>
-                        <p class="pl-4 text-emerald-400">// Caso Base</p>
-                        <p class="pl-4"><span class="text-blue-400">Si</span> n <= 1 <span class="text-blue-400">Entonces</span></p>
-                        <p class="pl-8 text-amber-300">Retornar 1</p>
-                        <p class="pl-4"><span class="text-blue-400">Sino</span></p>
-                        <p class="pl-8 text-emerald-400">// Caso Recursivo</p>
-                        <p class="pl-8 text-amber-300">Retornar n * Factorial(n - 1)</p>
-                        <p class="pl-4"><span class="text-blue-400">FinSi</span></p>
-                        <p class="text-purple-400">FinFuncion</p>
-                    </div>
-
-                    <!-- Value Selector -->
-                    <div>
-                        <label class="text-xs text-slate-400 font-medium block mb-1">Selecciona el valor de N a simular:</label>
-                        <select id="stack-input-n" onchange="resetStackSim()" class="w-full bg-slate-800 border border-slate-700 text-slate-100 rounded-lg p-2 text-xs focus:ring-2 focus:ring-brand-500">
-                            <option value="3">Factorial(3)</option>
-                            <option value="4" selected>Factorial(4)</option>
-                            <option value="5">Factorial(5)</option>
-                        </select>
-                    </div>
-
-                    <!-- Simulator Control Buttons -->
-                    <div class="flex space-x-2 pt-2">
-                        <button onclick="stepStackForward()" class="flex-1 bg-brand-600 hover:bg-brand-500 text-white font-medium text-xs py-2.5 rounded-lg transition">
-                            <i class="fa-solid fa-play mr-1"></i> Siguiente Paso
-                        </button>
-                        <button onclick="resetStackSim()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs px-3 py-2.5 rounded-lg">
-                            <i class="fa-solid fa-rotate-left"></i>
-                        </button>
-                    </div>
-
-                    <!-- Explanatory State Box -->
-                    <div class="bg-slate-950 border border-slate-800 p-3 rounded-lg text-xs space-y-1">
-                        <span class="text-slate-500 font-semibold block uppercase text-[10px]">Estado de Ejecución:</span>
-                        <p id="stack-step-description" class="text-slate-300">Haz clic en "Siguiente Paso" para iniciar la simulación.</p>
-                    </div>
-                </div>
-
-                <!-- Visual Stack Canvas -->
-                <div class="lg:col-span-2 bg-slate-950 border border-slate-800 rounded-xl p-5 flex flex-col justify-between min-h-[400px]">
-                    <div class="flex justify-between items-center border-b border-slate-800 pb-3 mb-4">
-                        <span class="text-xs font-bold uppercase text-slate-400 tracking-wider">Memoria LIFO (Last In, First Out)</span>
-                        <span id="stack-phase-badge" class="text-xs px-2.5 py-0.5 rounded bg-slate-800 text-slate-400">Fase: Reposo</span>
-                    </div>
-
-                    <!-- Stack Tower Representation -->
-                    <div class="flex-1 flex flex-col-reverse justify-start items-center space-y-reverse space-y-3 p-4 bg-slate-900/50 rounded-xl border border-dashed border-slate-800 min-h-[280px]">
-                        <div id="stack-container" class="w-full max-w-md space-y-2 flex flex-col-reverse">
-                            <!-- Stack Frames dynamically pushed/popped here -->
-                        </div>
-                    </div>
-
-                    <!-- Call Stack Return Result Banner -->
-                    <div id="stack-final-result" class="mt-4 p-3 rounded-xl bg-slate-900 border border-slate-800 text-center text-xs font-semibold text-slate-400">
-                        Resultado final en el Programa Principal: <span id="stack-final-val" class="text-emerald-400 font-bold">-</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TAB 5: PLAN DE 3 DÍAS Y CHECKLIST -->
-        <section id="tab-plan" class="tab-content hidden space-y-6">
-            <div class="bg-slate-800/40 border border-slate-800 p-4 rounded-xl">
-                <h2 class="text-lg font-bold text-white">Plan de Estudio Estratégico de 3 Días</h2>
-                <p class="text-xs text-slate-400 mt-1">Cumple estas tareas diarias en orden para llegar al examen con total confianza.</p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Day 1 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                        <span class="text-xs font-bold text-brand-400 uppercase">Día 1: Bloque I (Temas 1 al 5)</span>
-                        <i class="fa-solid fa-calendar-day text-brand-500"></i>
-                    </div>
-                    <ul class="text-xs text-slate-300 space-y-2.5">
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d1-1" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d1-1">Estudiar preguntas de Temas 1 a 5 (45 preguntas total).</label>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d1-2" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d1-2">Hacer 3 pruebas de escritorio de bucles `Mientras` a mano.</label>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d1-3" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d1-3">Revisar operadores lógicos (AND / OR) y residuo `MOD`.</label>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Day 2 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                        <span class="text-xs font-bold text-purple-400 uppercase">Día 2: Bloque II (Temas 6 al 10)</span>
-                        <i class="fa-solid fa-calendar-day text-purple-500"></i>
-                    </div>
-                    <ul class="text-xs text-slate-300 space-y-2.5">
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d2-1" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d2-1">Dominar diferencia: Función (Retorna) vs Procedimiento.</label>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d2-2" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d2-2">Practicar rastreo de variables por Valor vs Referencia.</label>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d2-3" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d2-3">Completar los ejercicios de Pseudocódigo en el Tab 3.</label>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Day 3 -->
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-4">
-                    <div class="flex items-center justify-between border-b border-slate-800 pb-3">
-                        <span class="text-xs font-bold text-emerald-400 uppercase">Día 3: Bloque III (Temas 11 al 15)</span>
-                        <i class="fa-solid fa-calendar-day text-emerald-500"></i>
-                    </div>
-                    <ul class="text-xs text-slate-300 space-y-2.5">
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d3-1" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d3-1">Asegurar Caso Base y Caso Recursivo en Factorial/Fibonacci.</label>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d3-2" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d3-2">Utilizar el Visor de Pila Recursiva para entender apilado.</label>
-                        </li>
-                        <li class="flex items-start gap-2">
-                            <input type="checkbox" id="chk-d3-3" onchange="updateOverallProgress()" class="mt-0.5 rounded border-slate-700 bg-slate-800 text-brand-600 focus:ring-0">
-                            <label for="chk-d3-3">Completar un Test Rápido Aleatorio en el Tab 2 al 100%.</label>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </section>
-
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-4 text-center text-xs text-slate-500">
-        <p>Master en Algoritmos • 45 Preguntas Oficiales y 15 Temas de Examen Escrito</p>
-    </footer>
-
-    <!-- JavaScript Application Logic -->
     <script>
-        /* -------------------------------------------------------------
-           COMPLETE 45 QUESTIONS DATABASE (3 PER TOPIC / 15 TOPICS)
-        ------------------------------------------------------------- */
-        const allQuestionsData = [
+        // BANCO DE 45 PREGUNTAS COMPLETO (15 TEMAS x 3 PREGUNTAS)
+        const questionsData = [
             // TEMA 1
-            { id: 1, topic: 1, block: 1, topicName: "Tema 1: Introducción a la Algoritmia", question: "¿Qué es un algoritmo y cuáles son sus 3 características fundamentales?", answer: "Un <strong>algoritmo</strong> es un conjunto finito de pasos ordenados y no ambiguos para resolver un problema. Sus 3 características son: <strong>Preciso</strong> (indica el orden exacto de cada paso), <strong>Definido</strong> (mismos datos producen el mismo resultado) y <strong>Finito</strong> (debe terminar en algún momento).", mastery: 'none' },
-            { id: 2, topic: 1, block: 1, topicName: "Tema 1: Introducción a la Algoritmia", question: "¿Cuáles son las fases principales en la resolución de problemas por computadora?", answer: "1. <strong>Análisis del problema</strong> (definir entradas, procesos y salidas).<br>2. <strong>Diseño del algoritmo</strong> (pseudocódigo o diagrama).<br>3. <strong>Codificación</strong>.<br>4. <strong>Prueba y Depuración</strong>.<br>5. <strong>Mantenimiento</strong>.", mastery: 'none' },
-            { id: 3, topic: 1, block: 1, topicName: "Tema 1: Introducción a la Algoritmia", question: "¿Cuál es la diferencia entre un dato de Entrada, un Proceso y una Salida?", answer: "La <strong>Entrada</strong> representa los datos iniciales que recibe el algoritmo; el <strong>Proceso</strong> son las operaciones lógicas y matemáticas aplicadas a los datos; y la <strong>Salida</strong> son los resultados finales devueltos.", mastery: 'none' },
-
+            { topic: 1, block: "I", q: "¿Qué es un algoritmo y cuáles son sus 3 características fundamentales?", a: "Es un conjunto finito de pasos ordenados y no ambiguos para resolver un problema. Sus 3 características son: Preciso (indica el orden exacto), Definido (mismos datos producen mismo resultado) y Finito (debe terminar)." },
+            { topic: 1, block: "I", q: "¿Cuáles son las fases para la resolución de un problema por computadora?", a: "1. Análisis del problema, 2. Diseño del algoritmo, 3. Codificación, 4. Prueba y Depuración, 5. Mantenimiento." },
+            { topic: 1, block: "I", q: "¿Cuál es la diferencia entre datos de Entrada, Proceso y Salida?", a: "Entrada: Datos iniciales ingresados. Proceso: Operaciones y transformación de los datos. Salida: Resultado final entregado por el programa." },
+            
             // TEMA 2
-            { id: 4, topic: 2, block: 1, topicName: "Tema 2: Representación de Algoritmos", question: "¿Qué es el Pseudocódigo y cuál es su ventaja principal?", answer: "Es un lenguaje informal de alto nivel que describe la lógica de un algoritmo en lenguaje natural estructurado. Su ventaja es que se centra en la <strong>lógica del algoritmo</strong> sin preocuparse por la sintaxis estricta de un lenguaje de programación específico.", mastery: 'none' },
-            { id: 5, topic: 2, block: 1, topicName: "Tema 2: Representación de Algoritmos", question: "¿Qué representa el Óvalo, el Rombo y el Paralelogramo en un Diagrama de Flujo?", answer: "• <strong>Óvalo:</strong> Inicio o Fin del algoritmo.<br>• <strong>Rombo:</strong> Toma de decisión / Condicional.<br>• <strong>Paralelogramo:</strong> Entrada o Salida de datos.", mastery: 'none' },
-            { id: 6, topic: 2, block: 1, topicName: "Tema 2: Representación de Algoritmos", question: "¿En qué consiste una Prueba de Escritorio (Tabla de Traza)?", answer: "Es la simulación manual paso a paso de un algoritmo en papel anotando el estado cambiante de las variables para verificar la corrección lógica de la solución.", mastery: 'none' },
+            { topic: 2, block: "I", q: "¿Qué es el Pseudocódigo y cuál es su ventaja principal?", a: "Es un lenguaje informal de alto nivel para diseñar algoritmos sin preocuparse por la sintaxis estricta de un lenguaje de programación específico." },
+            { topic: 2, block: "I", q: "En Diagramas de Flujo, ¿qué representan el Óvalo, Rombo y Paralelogramo?", a: "Óvalo: Inicio/Fin del algoritmo. Rombo: Toma de decisiones (condicional). Paralelogramo: Lectura de entrada o impresión de salida." },
+            { topic: 2, block: "I", q: "¿En qué consiste una Prueba de Escritorio (Tabla de Traza)?", a: "En la ejecución manual paso a paso del algoritmo registrando en una tabla los cambios de las variables para verificar la corrección lógica." },
 
             // TEMA 3
-            { id: 7, topic: 3, block: 1, topicName: "Tema 3: Tipos de Datos y Operadores", question: "¿Diferencia conceptual entre una Variable y una Constante?", answer: "Una <strong>variable</strong> es un espacio de memoria cuyo contenido puede cambiar durante la ejecución del programa. Una <strong>constante</strong> almacena un valor fijo que permanece inalterable durante todo el proceso.", mastery: 'none' },
-            { id: 8, topic: 3, block: 1, topicName: "Tema 3: Tipos de Datos y Operadores", question: "¿Qué es el operador residuo/módulo (MOD o %) y cuál es su uso más común?", answer: "Devuelve el resto de la división entera entre dos números. Se usa habitualmente para comprobar si un número es par (<code>n MOD 2 == 0</code>) o múltiplo de otro.", mastery: 'none' },
-            { id: 9, topic: 3, block: 1, topicName: "Tema 3: Tipos de Datos y Operadores", question: "¿Qué diferencia existe entre un operador relacional y uno lógico?", answer: "Los operadores <strong>relacionales</strong> (<code><</code>, <code>></code>, <code>==</code>, <code>!=</code>) comparan dos valores numéricos o alfanuméricos. Los <strong>lógicos</strong> (<code>AND</code>, <code>OR</code>, <code>NOT</code>) operan sobre expresiones booleanas.", mastery: 'none' },
+            { topic: 3, block: "I", q: "¿Diferencia entre una Variable y una Constante?", a: "Variable: Espacio en memoria cuyo valor cambia durante la ejecución. Constante: Valor fijo que permanece inalterable durante toda la ejecución." },
+            { topic: 3, block: "I", q: "¿Qué hace el operador MOD (%) y cuál es su uso principal en exámenes?", a: "Devuelve el residuo de la división entera. Se usa comúnmente para determinar si un número es par (n MOD 2 == 0) o múltiplo de otro." },
+            { topic: 3, block: "I", q: "¿Diferencia entre operadores Relacionales y Lógicos?", a: "Relacionales (>, <, ==, !=): Comparan dos valores numéricos o texto. Lógicos (AND, OR, NOT): Combinan o invierten expresiones booleanas." },
 
             // TEMA 4
-            { id: 10, topic: 4, block: 1, topicName: "Tema 4: Estructuras Selectivas", question: "¿Cómo funciona la evaluación lógica de los operadores Y (AND) u O (OR)?", answer: "• <strong>Y (AND):</strong> Devuelve <code>Verdadero</code> únicamente si <strong>ambas condiciones son verdaderas</strong>.<br>• <strong>O (OR):</strong> Devuelve <code>Verdadero</code> si <strong>al menos una de las condiciones es verdadera</strong>.", mastery: 'none' },
-            { id: 11, topic: 4, block: 1, topicName: "Tema 4: Estructuras Selectivas", question: "¿Cuándo es preferible usar la estructura 'Según Sea / Switch' en lugar de un 'Si-Sino'?", answer: "Cuando se debe comparar una misma variable contra múltiples opciones discretas de constantes (como opciones de un menú), mejorando la legibilidad.", mastery: 'none' },
-            { id: 12, topic: 4, block: 1, topicName: "Tema 4: Estructuras Selectivas", question: "¿Qué es una condición anidada?", answer: "Ocurre cuando una estructura condicional <code>Si-Entonces</code> se coloca dentro del bloque de instrucciones de otra estructura condicional.", mastery: 'none' },
+            { topic: 4, block: "I", q: "¿Cómo funcionan las tablas de verdad de los operadores Y (AND) y O (OR)?", a: "AND: Solo devuelve Verdadero si AMBAS condiciones son verdaderas. OR: Devuelve Verdadero si AL MENOS UNA condición es verdadera." },
+            { topic: 4, block: "I", q: "¿Cuándo se usa una estructura Según Sea (Switch) en lugar de múltiples Si-Sino?", a: "Cuando se debe comparar una misma variable discreta contra varios valores constantes específicos (ejemplo: menús de opciones)." },
+            { topic: 4, block: "I", q: "¿Qué es una condición anidada?", a: "Es una estructura Si-Entonces que se encuentra colocada dentro del bloque de ejecución de otra estructura Si-Entonces." },
 
             // TEMA 5
-            { id: 13, topic: 5, block: 1, topicName: "Tema 5: Estructuras Repetitivas (Iteración)", question: "¿Diferencia fundamental entre un bucle Mientras y un Repetir-Hasta (Hacer-Mientras)?", answer: "El bucle <strong>Mientras</strong> evalúa la condición <strong>al inicio</strong> (puede ejecutarse 0 veces). El bucle <strong>Repetir-Hasta</strong> la evalúa <strong>al final</strong> (se ejecuta obligatoriamente al menos 1 vez).", mastery: 'none' },
-            { id: 14, topic: 5, block: 1, topicName: "Tema 5: Estructuras Repetitivas (Iteración)", question: "¿Diferencia entre un Contador y un Acumulador?", answer: "Un <strong>contador</strong> se incrementa o decrementa en una constante fija (ej. <code>c <- c + 1</code>). Un <strong>acumulador</strong> suma cantidades variables (ej. <code>suma <- suma + precio</code>).", mastery: 'none' },
-            { id: 15, topic: 5, block: 1, topicName: "Tema 5: Estructuras Repetitivas (Iteración)", question: "¿Qué causa un bucle infinito y cómo se evita en el bucle Mientras?", answer: "Ocurre cuando la condición del ciclo nunca se vuelve falsa. Se evita asegurando que la variable de control se modifique explícitamente dentro del cuerpo del bucle.", mastery: 'none' },
+            { topic: 5, block: "I", q: "¿Diferencia fundamental entre bucle Mientras y Repetir-Hasta?", a: "Mientras: Evalúa la condición al INICIO (puede ejecutarse 0 veces). Repetir-Hasta: Evalúa la condición al FINAL (se ejecuta al menos 1 vez)." },
+            { topic: 5, block: "I", q: "¿Diferencia entre un Contador y un Acumulador?", a: "Contador: Incrementa o decrementa por una constante fija (c <- c + 1). Acumulador: Suma valores variables (s <- s + precio)." },
+            { topic: 5, block: "I", q: "¿Qué es un bucle infinito y cómo se evita?", a: "Es un ciclo que jamás termina porque la condición nunca se vuelve falsa. Se evita modificando internamente la variable de control del bucle." },
 
             // TEMA 6
-            { id: 16, topic: 6, block: 2, topicName: "Tema 6: Modularidad y Ámbito", question: "¿En qué consiste el principio de Diseño Descendente (Top-Down)?", answer: "Consiste en descomponer un problema complejo en subproblemas más simples (módulos), los cuales se van resolviendo jerárquicamente hasta completar la solución general.", mastery: 'none' },
-            { id: 17, topic: 6, block: 2, topicName: "Tema 6: Modularidad y Ámbito", question: "¿Diferencia entre Variable Local y Variable Global?", answer: "Una <strong>variable local</strong> sólo es accesible dentro del subalgoritmo en que fue declarada. Una <strong>variable global</strong> es accesible desde cualquier parte del programa principal.", mastery: 'none' },
-            { id: 18, topic: 6, block: 2, topicName: "Tema 6: Modularidad y Ámbito", question: "¿Por qué es una mala práctica abusar de las variables globales?", answer: "Porque rompe el principio de modularidad e independencia, dificulta la depuración y genera efectos secundarios no deseados al alterar datos en partes distantes del código.", mastery: 'none' },
+            { topic: 6, block: "II", q: "¿En qué consiste el Diseño Descendente (Top-Down)?", a: "Consiste en descomponer un problema complejo en subproblemas más pequeños y manejables (módulos) ordenados jerárquicamente." },
+            { topic: 6, block: "II", q: "¿Diferencia entre Variable Local y Variable Global?", a: "Local: Declarada dentro de un subalgoritmo, solo existe en él. Global: Declarada en el programa principal, accesible desde cualquier subalgoritmo." },
+            { topic: 6, block: "II", q: "¿Por qué es mala práctica abusar de las variables globales?", a: "Destruye la modularidad, dificulta la depuración del código y aumenta el riesgo de modificaciones colaterales no deseadas." },
 
             // TEMA 7
-            { id: 19, topic: 7, block: 2, topicName: "Tema 7: Procedimientos", question: "¿Qué es un Procedimiento en pseudocódigo?", answer: "Es un subalgoritmo independiente que ejecuta un conjunto de instrucciones para realizar una tarea específica <strong>sin devolver un valor directo</strong>.", mastery: 'none' },
-            { id: 20, topic: 7, block: 2, topicName: "Tema 7: Procedimientos", question: "¿Cómo se invoca un procedimiento en pseudocódigo?", answer: "Se invoca mediante su nombre seguido de la lista de parámetros actuales como una línea de código independiente (ejemplo: <code>ImprimirMenu()</code>).", mastery: 'none' },
-            { id: 21, topic: 7, block: 2, topicName: "Tema 7: Procedimientos", question: "¿Puede un procedimiento modificar variables del programa principal?", answer: "Sí, siempre y cuando dichas variables hayan sido pasadas explícitamente como parámetros <strong>por referencia</strong>.", mastery: 'none' },
+            { topic: 7, block: "II", q: "¿Qué es un Procedimiento?", a: "Es un subalgoritmo que ejecuta una secuencia de instrucciones para realizar una tarea concreta SIN devolver ningún valor." },
+            { topic: 7, block: "II", q: "¿Cómo se invoca un Procedimiento en pseudocódigo?", a: "Se invoca escribiendo su nombre seguido de sus argumentos como una instrucción independiente (ejemplo: Llamar ImprimirMenu())." },
+            { topic: 7, block: "II", q: "¿Puede un procedimiento modificar variables del programa principal?", a: "Sí, siempre y cuando dichas variables hayan sido pasadas como parámetros Por Referencia." },
 
             // TEMA 8
-            { id: 22, topic: 8, block: 2, topicName: "Tema 8: Funciones", question: "¿Qué es una Función y cuál es su característica distintiva?", answer: "Es un subalgoritmo que procesa datos de entrada y <strong>devuelve obligatoriamente un único valor computado</strong> al punto desde donde fue invocada.", mastery: 'none' },
-            { id: 23, topic: 8, block: 2, topicName: "Tema 8: Funciones", question: "¿Cuál es el rol de la instrucción Retornar (o Devolver) en una función?", answer: "Es la sentencia que finaliza la ejecución de la función enviando el valor resultante al código solicitante.", mastery: 'none' },
-            { id: 24, topic: 8, block: 2, topicName: "Tema 8: Funciones", question: "¿Diferencia en la llamada de una Función vs un Procedimiento?", answer: "Una <strong>función</strong> se invoca dentro de una expresión o asignación (ej. <code>x <- Calcular(a)</code>). Un <strong>procedimiento</strong> se llama como instrucción aislada.", mastery: 'none' },
+            { topic: 8, block: "II", q: "¿Qué es una Función y cuál es su característica principal?", a: "Es un subalgoritmo que procesa datos de entrada y DEVUELVE OBLIGATORIAMENTE un único valor de resultado." },
+            { topic: 8, block: "II", q: "¿Para qué sirve la sentencia Retornar / Devolver?", a: "Termina la ejecución de la función y envía el valor resultante de vuelta al punto de llamada en el programa principal." },
+            { topic: 8, block: "II", q: "¿Diferencia sintáctica en la llamada de una Función vs Procedimiento?", a: "La Función se llama dentro de una expresión o asignación (x <- Calcular()); el Procedimiento se llama como una línea aislada." },
 
             // TEMA 9
-            { id: 25, topic: 9, block: 2, topicName: "Tema 9: Paso de Parámetros", question: "¿Diferencia entre Parámetros Formales y Parámetros Actuales (Reales)?", answer: "Los <strong>formales</strong> son las variables declaradas en la cabecera del subalgoritmo. Los <strong>actuales</strong> son las variables o valores reales enviados durante la llamada.", mastery: 'none' },
-            { id: 26, topic: 9, block: 2, topicName: "Tema 9: Paso de Parámetros", question: "Explicar detalladamente el Paso por Valor.", answer: "Se pasa una <strong>copia independiente</strong> del valor de la variable. Las modificaciones dentro del subalgoritmo <strong>no afectan</strong> a la variable original del programa principal.", mastery: 'none' },
-            { id: 27, topic: 9, block: 2, topicName: "Tema 9: Paso de Parámetros", question: "Explicar detalladamente el Paso por Referencia.", answer: "Se pasa la <strong>dirección de memoria</strong> de la variable. Cualquier cambio dentro del subalgoritmo <strong>modifica de forma directa</strong> el valor de la variable original.", mastery: 'none' },
+            { topic: 9, block: "II", q: "¿Diferencia entre Parámetros Formales y Actuales?", a: "Formales: Las variables definidas en la declaración de la función. Actuales: Los valores o variables reales pasados en la llamada." },
+            { topic: 9, block: "II", q: "Explicación exacta de Paso por Valor:", a: "Se envía una copia del dato. Las modificaciones dentro de la función NO alteran la variable original del programa principal." },
+            { topic: 9, block: "II", q: "Explicación exacta de Paso por Referencia:", a: "Se envía la dirección de memoria. Cualquier modificación dentro del subalgoritmo altera DIRECTAMENTE la variable original." },
 
             // TEMA 10
-            { id: 28, topic: 10, block: 2, topicName: "Tema 10: Arreglos y Subalgoritmos", question: "¿Cómo deben pasarse habitualmente los arreglos (vectores) a subalgoritmos?", answer: "Se pasan <strong>por referencia</strong> para evitar duplicar grandes estructuras en memoria y permitir su modificación directa.", mastery: 'none' },
-            { id: 29, topic: 10, block: 2, topicName: "Tema 10: Arreglos y Subalgoritmos", question: "¿Qué parámetro adicional debe recibir una función que procesa un vector?", answer: "Debe recibir obligatoriamente el <strong>tamaño o cantidad de elementos válidos</strong> del arreglo para evitar accesos fuera de rango.", mastery: 'none' },
-            { id: 30, topic: 10, block: 2, topicName: "Tema 10: Arreglos y Subalgoritmos", question: "¿Cómo se recorre un arreglo dentro de una función en pseudocódigo?", answer: "Utilizando un bucle iterativo (generalmente <code>Para i <- 1 Hasta tamaño</code>) accediendo a cada elemento mediante el índice <code>arreglo[i]</code>.", mastery: 'none' },
+            { topic: 10, block: "II", q: "¿Cómo se pasan habitualmente los arreglos a los subalgoritmos y por qué?", a: "Se pasan Por Referencia para evitar consumir memoria excesiva realizando copias completas del arreglo." },
+            { topic: 10, block: "II", q: "¿Qué parámetro adicional debe acompañar siempre a un arreglo en un subalgoritmo?", a: "Su tamaño o cantidad de elementos activos, para evitar desbordamientos de límites en memoria." },
+            { topic: 10, block: "II", q: "¿Cómo se busca un elemento dentro de un arreglo en una función?", a: "Recorriendo el arreglo elemento a elemento mediante un bucle e igualando cada elemento con el valor buscado." },
 
             // TEMA 11
-            { id: 31, topic: 11, block: 3, topicName: "Tema 11: Introducción a la Recursividad", question: "¿Qué es la Recursividad y cuáles son sus dos partes obligatorias?", answer: "Es una técnica donde una función se llama a sí misma para resolver instancias más pequeñas de un problema. Requiere un <strong>Caso Base</strong> (detiene la recursión) y un <strong>Caso Recursivo</strong> (llamada recursiva).", mastery: 'none' },
-            { id: 32, topic: 32, block: 3, topicName: "Tema 11: Introducción a la Recursividad", question: "¿Qué sucede si una función recursiva carece de Caso Base?", answer: "Se produce una recursión infinita que agota la memoria reservada para la pila de llamadas, provocando un error de <strong>Stack Overflow</strong>.", mastery: 'none' },
-            { id: 33, topic: 33, block: 3, topicName: "Tema 11: Introducción a la Recursividad", question: "¿En qué consiste la técnica de 'Divide y Vencerás' en recursión?", answer: "En dividir un problema en subproblemas idénticos más pequeños, resolverlos recursivamente y combinar sus resultados para solucionar el problema original.", mastery: 'none' },
+            { topic: 11, block: "III", q: "¿Qué es la Recursividad?", a: "Técnica de programación donde una función se llama a sí misma para resolver instancias más pequeñas de un mismo problema." },
+            { topic: 11, block: "III", q: "¿Cuáles son los 2 componentes obligatorios de toda función recursiva?", a: "1. CASO BASE (condición de parada que rompe la recursión). 2. CASO RECURSIVO (llamada a sí misma reduciendo datos)." },
+            { topic: 11, block: "III", q: "¿Qué ocurre si una función recursiva no tiene Caso Base?", a: "Entra en un bucle infinito de llamadas hasta agotar la memoria de la máquina (error de Stack Overflow)." },
 
             // TEMA 12
-            { id: 34, topic: 12, block: 3, topicName: "Tema 12: La Pila de Llamadas (Call Stack)", question: "¿Qué es la Pila de Llamadas (Call Stack)?", answer: "Es la estructura de memoria (tipo LIFO) gestionada por el sistema que guarda los registros de activación de las funciones activas o suspendidas.", mastery: 'none' },
-            { id: 35, topic: 12, block: 3, topicName: "Tema 12: La Pila de Llamadas (Call Stack)", question: "¿Qué se almacena en un Registro de Activación en la Pila?", answer: "Se almacenan los parámetros recibidos, las variables locales declaradas y la dirección de retorno para continuar la ejecución.", mastery: 'none' },
-            { id: 36, topic: 12, block: 3, topicName: "Tema 12: La Pila de Llamadas (Call Stack)", question: "¿Cómo se desapilan las llamadas recursivas?", answer: "Cuando la función alcanza el Caso Base, comienza el proceso de desapilado (POP), devolviendo los resultados en orden inverso hacia arriba.", mastery: 'none' },
+            { topic: 12, block: "III", q: "¿Qué es la Pila de Llamadas (Call Stack)?", a: "Estructura LIFO (Last In, First Out) en memoria que guarda las funciones pendientes por terminar y sus variables." },
+            { topic: 12, block: "III", q: "¿Qué es un Registro de Activación?", a: "Bloque de memoria creado en la pila en cada llamada a función para guardar sus parámetros, variables locales y dirección de retorno." },
+            { topic: 12, block: "III", q: "¿Cómo se produce un error de Stack Overflow?", a: "Cuando el número de llamadas recursivas sobrepasa la memoria límite disponible de la pila por falta de caso base." },
 
             // TEMA 13
-            { id: 37, topic: 13, block: 3, topicName: "Tema 13: Tipos de Recursividad", question: "¿Diferencia entre Recursividad Directa e Indirecta?", answer: "• <strong>Directa:</strong> La función A se llama a sí misma.<br>• <strong>Indirecta:</strong> La función A llama a B, y la función B llama nuevamente a A.", mastery: 'none' },
-            { id: 38, topic: 13, block: 3, topicName: "Tema 13: Tipos de Recursividad", question: "¿Qué es la Recursividad de Cola / Final (Tail Recursion)?", answer: "Es cuando la llamada recursiva es la última instrucción ejecutada por la función y su resultado no requiere operaciones posteriores.", mastery: 'none' },
-            { id: 39, topic: 13, block: 3, topicName: "Tema 13: Tipos de Recursividad", question: "¿Por qué la recursividad de cola es ventajosa para los optimizadores?", answer: "Porque permite reutilizar el mismo registro de activación en la pila, optimizando la memoria y transformándola en iteración.", mastery: 'none' },
+            { topic: 13, block: "III", q: "¿Diferencia entre Recursividad Directa e Indirecta?", a: "Directa: La función A se llama a sí misma directamente. Indirecta: La función A llama a B, y B llama de nuevo a A." },
+            { topic: 13, block: "III", q: "¿Qué es la Recursividad de Cola (Tail Recursion)?", a: "Cuando la llamada recursiva es la última instrucción ejecutada, permitiendo optimizar el uso de la memoria de pila." },
+            { topic: 13, block: "III", q: "¿Por qué la recursividad de cola es preferible para los compiladores?", a: "Porque permite reutilizar el mismo registro de activación en la pila, convirtiendo la recursión en un ciclo iterativo eficiente." },
 
             // TEMA 14
-            { id: 40, topic: 14, block: 3, topicName: "Tema 14: Algoritmos Recursivos Clásicos", question: "Escribir la definición recursiva del Factorial (N!).", answer: "• <strong>Caso Base:</strong> Si <code>n <= 1</code> Retornar <code>1</code>.<br>• <strong>Caso Recursivo:</strong> Sino Retornar <code>n * Factorial(n - 1)</code>.", mastery: 'none' },
-            { id: 41, topic: 14, block: 3, topicName: "Tema 14: Algoritmos Recursivos Clásicos", question: "Escribir la definición recursiva de Fibonacci (N).", answer: "• <strong>Casos Base:</strong> Si <code>n == 0</code> Retornar <code>0</code>; si <code>n == 1</code> Retornar <code>1</code>.<br>• <strong>Caso Recursivo:</strong> Retornar <code>Fibonacci(n-1) + Fibonacci(n-2)</code>.", mastery: 'none' },
-            { id: 42, topic: 14, block: 3, topicName: "Tema 14: Algoritmos Recursivos Clásicos", question: "Explicar el funcionamiento general de las Torres de Hanói recursivas.", answer: "Mueve N-1 discos de la torre Origen a la Auxiliar, mueve el disco restante a la Destino, y luego mueve los N-1 discos de la Auxiliar a la Destino.", mastery: 'none' },
+            { topic: 14, block: "III", q: "Definición matemática recursiva del Factorial (n!):", a: "Caso Base: Factorial(0) = 1. Caso Recursivo: Factorial(n) = n * Factorial(n - 1) para n > 0." },
+            { topic: 14, block: "III", q: "Definición matemática recursiva de Fibonacci (Fn):", a: "Casos Base: F(0)=0, F(1)=1. Caso Recursivo: F(n) = F(n-1) + F(n-2) para n > 1." },
+            { topic: 14, block: "III", q: "¿En qué consiste el problema de las Torres de Hanói?", a: "Mover N discos entre 3 torres respetando que un disco mayor nunca quede sobre uno menor. Requiere 2^n - 1 movimientos." },
 
             // TEMA 15
-            { id: 43, topic: 15, block: 3, topicName: "Tema 15: Comparativa y Eficiencia (Big-O)", question: "¿Qué mide la Notación Big-O (O) en análisis de algoritmos?", answer: "Mide el comportamiento asintótico y el crecimiento de la complejidad temporal (tiempo) o espacial (memoria) según el tamaño de datos N.", mastery: 'none' },
-            { id: 44, topic: 15, block: 3, topicName: "Tema 15: Comparativa y Eficiencia (Big-O)", question: "Comparar Recursividad vs Iteración en tiempo y memoria.", answer: "La <strong>Recursividad</strong> produce código más corto e intuitivo pero consume más memoria en la pila. La <strong>Iteración</strong> es más eficiente en espacio y tiempo.", mastery: 'none' },
-            { id: 45, topic: 15, block: 3, topicName: "Tema 15: Comparativa y Eficiencia (Big-O)", question: "¿Cuándo se debe transformar un algoritmo recursivo a iterativo?", answer: "Cuando el número de llamadas es masivo y corre el riesgo de desbordamiento de pila (Stack Overflow) o cuando se requiere optimización extrema de memoria.", mastery: 'none' }
+            { topic: 15, block: "III", q: "¿Qué es la Notación Big-O (O)?", a: "Notación para medir la eficiencia o complejidad temporal y espacial de un algoritmo conforme aumenta el tamaño de los datos N." },
+            { topic: 15, block: "III", q: "Recursividad vs Iteración (Ventajas y Desventajas):", a: "Recursividad: Código más claro para estructuras complejas, pero mayor consumo de memoria. Iteración: Más rápida y eficiente en memoria." },
+            { topic: 15, block: "III", q: "¿Cuándo se debe transformar un algoritmo recursivo a iterativo?", a: "Cuando se requiera optimizar al máximo el rendimiento y evitar riesgos de desbordamiento de memoria por llamadas masivas." }
         ];
 
-        /* -------------------------------------------------------------
-           DATA: PSEUDOCODE FILL-IN EXERCISES
-        ------------------------------------------------------------- */
-        const pseudocodeExercises = [
+        // DATOS DE BUGS (DOCTOR DEL CODIGO)
+        const bugData = [
             {
-                id: 1,
-                title: "1. Suma de Pares (Bucles e If)",
-                difficulty: "Básico",
-                instructions: "Completa las estructuras iterativas y condicionales para acumular la suma de números pares hasta N.",
-                template: [
-                    { type: 'text', content: 'Algoritmo SumaPares' },
-                    { type: 'text', content: '    Entero: i, N, suma' },
-                    { type: 'text', content: '    suma <- 0' },
-                    { type: 'text', content: '    Leer N' },
-                    { type: 'input_line', prefix: '    ', blank: 'Para', suffix: ' i <- 1 Hasta N Hacer', answer: 'Para' },
-                    { type: 'input_line', prefix: '        ', blank: 'Si', suffix: ' (i MOD 2 == 0) Entonces', answer: 'Si' },
-                    { type: 'text', content: '            suma <- suma + i' },
-                    { type: 'input_line', prefix: '        ', blank: 'FinSi', suffix: '', answer: 'FinSi' },
-                    { type: 'input_line', prefix: '    ', blank: 'FinPara', suffix: '', answer: 'FinPara' },
-                    { type: 'text', content: '    Escribir "La suma es: ", suma' },
-                    { type: 'text', content: 'FinAlgoritmo' }
-                ]
+                code: "Funcion Entero Sumar(a, b)\n    resultado <- a + b\nFinFuncion",
+                options: ["Falta la palabra Retornar", "Las variables deben ser globales", "Falta la palabra FinSi"],
+                correct: 0,
+                explain: "¡Correcto! Toda Función DEBE terminar devolviendo un resultado con la palabra 'Retornar'."
             },
             {
-                id: 2,
-                title: "2. Factorial Recursivo",
-                difficulty: "Intermedio",
-                instructions: "Completa la sintaxis exacta de la función recursiva del Factorial.",
-                template: [
-                    { type: 'input_line', prefix: '', blank: 'Funcion', suffix: ' Entero Factorial(Entero n)', answer: 'Funcion' },
-                    { type: 'text', content: '    // Caso Base' },
-                    { type: 'input_line', prefix: '    ', blank: 'Si', suffix: ' (n <= 1) Entonces', answer: 'Si' },
-                    { type: 'input_line', prefix: '        ', blank: 'Retornar', suffix: ' 1', answer: 'Retornar' },
-                    { type: 'text', content: '    Sino' },
-                    { type: 'text', content: '        // Caso Recursivo' },
-                    { type: 'input_line', prefix: '        ', blank: 'Retornar', suffix: ' n * Factorial(n - 1)', answer: 'Retornar' },
-                    { type: 'text', content: '    FinSi' },
-                    { type: 'input_line', prefix: '', blank: 'FinFuncion', suffix: '', answer: 'FinFuncion' }
-                ]
+                code: "Mientras (i < 10) Hacer\n    Escribir \"Número: \", i\nFinMientras",
+                options: ["El bucle debe ser un Para", "Entra en Bucle Infinito (Falta incrementar 'i')", "La condición requiere un Si"],
+                correct: 1,
+                explain: "¡Correcto! En un bucle Mientras debes incrementar manualmente la variable (i <- i + 1) para romper la condición."
             },
             {
-                id: 3,
-                title: "3. Procedimiento con Paso por Referencia",
-                difficulty: "Avanzado",
-                instructions: "Completa el procedimiento para intercambiar dos variables por referencia.",
-                template: [
-                    { type: 'text', content: 'Procedimiento Intercambiar(Por Referencia a, Por Referencia b)' },
-                    { type: 'text', content: '    Entero: aux' },
-                    { type: 'text', content: '    aux <- a' },
-                    { type: 'input_line', prefix: '    ', blank: 'a', suffix: ' <- b', answer: 'a' },
-                    { type: 'text', content: '    b <- aux' },
-                    { type: 'input_line', prefix: '', blank: 'FinProcedimiento', suffix: '', answer: 'FinProcedimiento' }
-                ]
+                code: "Funcion Entero Factorial(n)\n    Retornar n * Factorial(n - 1)\nFinFuncion",
+                options: ["Falta el Caso Base (Condición de parada)", "La función debe ser un Procedimiento", "Está bien escrito"],
+                correct: 0,
+                explain: "¡Correcto! Sin Caso Base (Si n <= 1 Retornar 1), la función se llamará infinitamente causando Stack Overflow."
             }
         ];
 
-        /* -------------------------------------------------------------
-           STATE MANAGEMENT
-        ------------------------------------------------------------- */
-        let filteredCards = [...allQuestionsData];
-        let currentCardIndex = 0;
-        let isCardFlipped = false;
-        let currentExerciseIndex = 0;
-
-        let stackState = {
-            n: 4,
-            currentStep: 0,
-            phase: 'idle',
-            frames: []
-        };
-
-        /* -------------------------------------------------------------
-           INITIALIZATION & TABS NAVIGATION
-        ------------------------------------------------------------- */
-        window.onload = function() {
-            renderFlashcard();
-            renderCodeExerciseSelectors();
-            loadCodeExercise(0);
-            updateOverallProgress();
+        // INICIALIZACION
+        window.onload = () => {
+            populateTopicDropdown();
+            renderQuestions();
+            renderBugs();
         };
 
         function switchTab(tabId) {
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            document.querySelectorAll('.tab-btn').forEach(btn => {
-                btn.classList.remove('border-brand-500', 'text-brand-500');
-                btn.classList.add('border-transparent', 'text-slate-400');
-            });
-
-            document.getElementById(`tab-${tabId}`).classList.remove('hidden');
-            const activeBtn = document.getElementById(`tab-btn-${tabId}`);
-            activeBtn.classList.add('border-brand-500', 'text-brand-500');
-            activeBtn.classList.remove('border-transparent', 'text-slate-400');
-
-            if (tabId === 'quiz') {
-                generateQuickQuiz();
-            }
-        }
-
-        /* -------------------------------------------------------------
-           FLASHCARD FILTERS & NAVIGATION LOGIC
-        ------------------------------------------------------------- */
-        function filterBlock(blockNum) {
-            document.querySelectorAll('.mod-filter-btn').forEach(b => {
-                b.classList.remove('bg-brand-600', 'text-white');
-                b.classList.add('bg-slate-800', 'text-slate-300');
-            });
-            event.target.classList.add('bg-brand-600', 'text-white');
-            document.getElementById('topic-select-dropdown').value = 'all';
-
-            if (blockNum === 'all') {
-                filteredCards = [...allQuestionsData];
-            } else {
-                filteredCards = allQuestionsData.filter(q => q.block === blockNum);
-            }
-            currentCardIndex = 0;
-            renderFlashcard();
-        }
-
-        function filterTopic(topicVal) {
-            if (topicVal === 'all') {
-                filteredCards = [...allQuestionsData];
-            } else {
-                const topicId = parseInt(topicVal);
-                filteredCards = allQuestionsData.filter(q => q.topic === topicId);
-            }
-            currentCardIndex = 0;
-            renderFlashcard();
-        }
-
-        function renderFlashcard() {
-            if (filteredCards.length === 0) return;
-            const card = filteredCards[currentCardIndex];
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.menu-item').forEach(m => m.classList.remove('active'));
             
-            const inner = document.getElementById('flashcard-inner');
-            inner.classList.remove('rotate-y-180');
-            isCardFlipped = false;
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
 
-            document.getElementById('card-counter').innerText = `Tarjeta ${currentCardIndex + 1} de ${filteredCards.length}`;
-            document.getElementById('card-topic-badge').innerText = card.topicName;
-            document.getElementById('card-question-text').innerText = card.question;
-            document.getElementById('card-answer-text').innerHTML = card.answer;
+        function populateTopicDropdown() {
+            const select = document.getElementById('filter-topic');
+            for(let i=1; i<=15; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = `Tema ${i}`;
+                select.appendChild(opt);
+            }
+        }
 
-            const masteryBadge = document.getElementById('card-mastery-badge');
-            if (card.mastery === 'perfect') {
-                masteryBadge.innerText = 'Dominado';
-                masteryBadge.className = 'px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800';
-            } else if (card.mastery === 'doubt') {
-                masteryBadge.innerText = 'Dudé';
-                masteryBadge.className = 'px-2.5 py-0.5 rounded bg-amber-950 text-amber-300 border border-amber-800';
-            } else if (card.mastery === 'wrong') {
-                masteryBadge.innerText = 'Revisar';
-                masteryBadge.className = 'px-2.5 py-0.5 rounded bg-red-950 text-red-300 border border-red-800';
+        function renderQuestions() {
+            const grid = document.getElementById('questions-grid');
+            grid.innerHTML = '';
+
+            const blockVal = document.getElementById('filter-block').value;
+            const topicVal = document.getElementById('filter-topic').value;
+
+            const filtered = questionsData.filter(q => {
+                const matchBlock = (blockVal === 'all' || q.block === blockVal);
+                const matchTopic = (topicVal === 'all' || q.topic == topicVal);
+                return matchBlock && matchTopic;
+            });
+
+            filtered.forEach((q, idx) => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => toggleAnswer(card);
+
+                card.innerHTML = `
+                    <span class="card-tag">Bloque ${q.block} | Tema ${q.topic}</span>
+                    <div class="card-q">${q.q}</div>
+                    <div class="card-a">${q.a}</div>
+                    <div class="card-footer">
+                        <span><i class="fa-solid fa-eye"></i> Ver respuesta</span>
+                        <span>#${idx+1}</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function toggleAnswer(card) {
+            const ans = card.querySelector('.card-a');
+            if (ans.style.display === 'block') {
+                ans.style.display = 'none';
             } else {
-                masteryBadge.innerText = 'Sin revisar';
-                masteryBadge.className = 'px-2.5 py-0.5 rounded bg-slate-800 text-slate-400 border border-slate-700';
+                ans.style.display = 'block';
             }
         }
 
-        function flipCard() {
-            const inner = document.getElementById('flashcard-inner');
-            isCardFlipped = !isCardFlipped;
-            if (isCardFlipped) {
-                inner.classList.add('rotate-y-180');
+        function filterQuestions() {
+            renderQuestions();
+        }
+
+        function renderBugs() {
+            const container = document.getElementById('bugs-container');
+            container.innerHTML = '';
+
+            bugData.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'bug-card';
+
+                let optionsHTML = '';
+                item.options.forEach((opt, optIndex) => {
+                    optionsHTML += `<button class="option-btn" onclick="checkBugAnswer(${index}, ${optIndex})">${opt}</button>`;
+                });
+
+                card.innerHTML = `
+                    <h3>Desafío #${index + 1}: ¿Cuál es el error en este código?</h3>
+                    <pre>${item.code}</pre>
+                    <div class="bug-options">${optionsHTML}</div>
+                    <div class="feedback" id="feedback-${index}"></div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        function checkBugAnswer(bugIdx, selectedOpt) {
+            const item = bugData[bugIdx];
+            const fb = document.getElementById(`feedback-${bugIdx}`);
+            fb.style.display = 'block';
+
+            if (selectedOpt === item.correct) {
+                fb.className = 'feedback correct';
+                fb.textContent = item.explain;
             } else {
-                inner.classList.remove('rotate-y-180');
+                fb.className = 'feedback incorrect';
+                fb.textContent = 'Incorrecto. Revisa bien las reglas de sintaxis obligatorias.';
             }
         }
 
-        function nextCard() {
-            if (filteredCards.length === 0) return;
-            currentCardIndex = (currentCardIndex + 1) % filteredCards.length;
-            renderFlashcard();
-        }
+        // VISUALIZADOR DE STACK
+        let currentN = 4;
+        let stackState = [];
 
-        function prevCard() {
-            if (filteredCards.length === 0) return;
-            currentCardIndex = (currentCardIndex - 1 + filteredCards.length) % filteredCards.length;
-            renderFlashcard();
-        }
-
-        function rateCard(rating) {
-            if (filteredCards.length === 0) return;
-            const card = filteredCards[currentCardIndex];
-            card.mastery = rating;
-            nextCard();
-            updateOverallProgress();
-        }
-
-        /* -------------------------------------------------------------
-           QUIZ MODE LOGIC (RANDOM 5 QUESTIONS)
-        ------------------------------------------------------------- */
-        function generateQuickQuiz() {
-            const container = document.getElementById('quiz-container');
-            container.innerHTML = '';
-
-            // Pick 5 random questions
-            const shuffled = [...allQuestionsData].sort(() => 0.5 - Math.random()).slice(0, 5);
-
-            shuffled.forEach((q, idx) => {
-                const quizCard = document.createElement('div');
-                quizCard.className = 'bg-slate-900 border border-slate-800 rounded-xl p-5 space-y-3';
-                quizCard.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <span class="text-xs font-bold text-brand-400">${q.topicName}</span>
-                        <span class="text-xs text-slate-500">Pregunta ${idx + 1} de 5</span>
-                    </div>
-                    <h4 class="font-semibold text-slate-100 text-sm sm:text-base">${q.question}</h4>
-                    <div id="quiz-ans-${idx}" class="hidden p-3 bg-slate-950 border border-slate-800 rounded-lg text-xs text-slate-200 leading-relaxed">
-                        ${q.answer}
-                    </div>
-                    <button onclick="toggleQuizAnswer(${idx})" class="text-xs text-brand-400 hover:text-brand-300 font-medium">
-                        <i class="fa-solid fa-eye mr-1"></i> Mostrar / Ocultar Respuesta Exacta
-                    </button>
-                `;
-                container.appendChild(quizCard);
-            });
-        }
-
-        function toggleQuizAnswer(idx) {
-            const ansBox = document.getElementById(`quiz-ans-${idx}`);
-            ansBox.classList.toggle('hidden');
-        }
-
-        /* -------------------------------------------------------------
-           PSEUDOCODE FILL-IN LOGIC
-        ------------------------------------------------------------- */
-        function renderCodeExerciseSelectors() {
-            const container = document.getElementById('code-exercise-selector');
-            container.innerHTML = '';
-            pseudocodeExercises.forEach((ex, idx) => {
-                const btn = document.createElement('button');
-                btn.className = `text-xs px-3 py-1.5 rounded-lg font-medium transition ${idx === currentExerciseIndex ? 'bg-brand-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'}`;
-                btn.innerText = `Ejerc. ${idx + 1}`;
-                btn.onclick = () => loadCodeExercise(idx);
-                container.appendChild(btn);
-            });
-        }
-
-        function loadCodeExercise(index) {
-            currentExerciseIndex = index;
-            renderCodeExerciseSelectors();
-            const ex = pseudocodeExercises[index];
-            
-            document.getElementById('exercise-title').innerText = ex.title;
-            document.getElementById('exercise-difficulty').innerText = `Dificultad: ${ex.difficulty}`;
-            document.getElementById('exercise-instructions').innerText = ex.instructions;
-
-            const container = document.getElementById('pseudocode-container');
-            container.innerHTML = '';
-
-            ex.template.forEach((item, i) => {
-                const line = document.createElement('div');
-                line.className = 'whitespace-pre';
-
-                if (item.type === 'text') {
-                    line.innerText = item.content;
-                } else if (item.type === 'input_line') {
-                    line.innerHTML = `${item.prefix}<input type="text" id="blank-input-${i}" data-answer="${item.answer}" class="bg-slate-800 border border-brand-500/50 text-brand-300 px-2 py-0.5 rounded text-xs font-mono w-28 text-center focus:outline-none focus:ring-2 focus:ring-brand-500" placeholder="???">${item.suffix}`;
-                }
-                container.appendChild(line);
-            });
-
-            document.getElementById('code-feedback-content').innerHTML = '<p class="italic text-slate-500">Rellena los espacios vacíos y haz clic en "Verificar Pseudocódigo".</p>';
-        }
-
-        function resetCurrentCodeExercise() {
-            loadCodeExercise(currentExerciseIndex);
-        }
-
-        function verifyCodeExercise() {
-            const ex = pseudocodeExercises[currentExerciseIndex];
-            let allCorrect = true;
-            let errors = [];
-
-            ex.template.forEach((item, i) => {
-                if (item.type === 'input_line') {
-                    const input = document.getElementById(`blank-input-${i}`);
-                    const userVal = input.value.trim();
-                    if (userVal.toLowerCase() === item.answer.toLowerCase()) {
-                        input.classList.remove('border-red-500', 'bg-red-950/50');
-                        input.classList.add('border-emerald-500', 'bg-emerald-950/50');
-                    } else {
-                        allCorrect = false;
-                        input.classList.remove('border-emerald-500', 'bg-emerald-950/50');
-                        input.classList.add('border-red-500', 'bg-red-950/50');
-                        errors.push(`Esperado "${item.answer}", ingresaste "${userVal || 'vacío'}"`);
-                    }
-                }
-            });
-
-            const feedbackContent = document.getElementById('code-feedback-content');
-            if (allCorrect) {
-                feedbackContent.innerHTML = `
-                    <div class="p-3 bg-emerald-950/60 border border-emerald-800 rounded-lg text-emerald-300 space-y-1">
-                        <p class="font-bold flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-check text-emerald-400"></i>
-                            <span>¡Sintaxis Impecable!</span>
-                        </p>
-                        <p class="text-[11px]">Pseudocódigo verificado para examen a mano.</p>
-                    </div>
-                `;
+        function pushStack() {
+            if (stackState.length < currentN) {
+                const val = currentN - stackState.length;
+                stackState.push(`Factorial(${val}) -> Esperando...`);
+                updateStackUI();
             } else {
-                feedbackContent.innerHTML = `
-                    <div class="p-3 bg-red-950/60 border border-red-800 rounded-lg text-red-300 space-y-1">
-                        <p class="font-bold flex items-center gap-1.5">
-                            <i class="fa-solid fa-circle-xmark text-red-400"></i>
-                            <span>Se encontraron fallas sintácticas:</span>
-                        </p>
-                        <ul class="list-disc list-inside text-[11px] space-y-0.5">
-                            ${errors.map(err => `<li>${err}</li>`).join('')}
-                        </ul>
-                    </div>
-                `;
+                document.getElementById('stack-status').textContent = "¡Llegaste al CASO BASE (Factorial(1))! Ahora debes desapilar (Pop) para calcular el resultado.";
             }
-            updateOverallProgress();
         }
 
-        /* -------------------------------------------------------------
-           CALL STACK RECURSION VISUALIZER LOGIC
-        ------------------------------------------------------------- */
-        function resetStackSim() {
-            const inputN = parseInt(document.getElementById('stack-input-n').value);
-            stackState = {
-                n: inputN,
-                currentStep: 0,
-                phase: 'idle',
-                frames: []
-            };
-            document.getElementById('stack-phase-badge').innerText = 'Fase: Reposo';
-            document.getElementById('stack-phase-badge').className = 'text-xs px-2.5 py-0.5 rounded bg-slate-800 text-slate-400';
-            document.getElementById('stack-step-description').innerText = 'Haz clic en "Siguiente Paso" para iniciar la simulación.';
-            document.getElementById('stack-final-val').innerText = '-';
-            renderStackUI();
-        }
-
-        function stepStackForward() {
-            const n = stackState.n;
-            
-            if (stackState.phase === 'idle' || stackState.phase === 'pushing') {
-                const currentCallVal = n - stackState.frames.length;
-                
-                if (currentCallVal >= 1) {
-                    stackState.phase = 'pushing';
-                    const isBaseCase = (currentCallVal === 1);
-                    
-                    stackState.frames.push({
-                        nVal: currentCallVal,
-                        returnVal: isBaseCase ? 1 : null,
-                        isBaseCase: isBaseCase
-                    });
-
-                    document.getElementById('stack-phase-badge').innerText = 'Fase: Apilando (PUSH)';
-                    document.getElementById('stack-phase-badge').className = 'text-xs px-2.5 py-0.5 rounded bg-brand-900 text-brand-300 border border-brand-700';
-
-                    if (isBaseCase) {
-                        document.getElementById('stack-step-description').innerText = `¡Alcanzado CASO BASE en Factorial(1)! Retorna 1 directamente sin más llamadas.`;
-                        stackState.phase = 'popping';
-                    } else {
-                        document.getElementById('stack-step-description').innerText = `Llamada Factorial(${currentCallVal}) apilada. Esperando el resultado de Factorial(${currentCallVal - 1}).`;
-                    }
-                }
-            } 
-            else if (stackState.phase === 'popping') {
-                const unreturnedIdx = stackState.frames.findIndex(f => f.returnVal === null);
-                
-                if (unreturnedIdx !== -1) {
-                    const prevReturn = stackState.frames[unreturnedIdx - 1].returnVal;
-                    const currentFrame = stackState.frames[unreturnedIdx];
-                    currentFrame.returnVal = currentFrame.nVal * prevReturn;
-
-                    document.getElementById('stack-phase-badge').innerText = 'Fase: Desapilando (POP)';
-                    document.getElementById('stack-phase-badge').className = 'text-xs px-2.5 py-0.5 rounded bg-emerald-950 text-emerald-300 border border-emerald-800';
-                    document.getElementById('stack-step-description').innerText = `Factorial(${currentFrame.nVal}) calcula: ${currentFrame.nVal} * ${prevReturn} = ${currentFrame.returnVal} y se desapila.`;
-                } else {
-                    stackState.phase = 'done';
-                    const finalResult = stackState.frames[stackState.frames.length - 1].returnVal;
-                    document.getElementById('stack-final-val').innerText = finalResult;
-                    document.getElementById('stack-step-description').innerText = `¡Ejecución finalizada! Retorno final devuelto al programa principal: ${finalResult}.`;
-                }
+        function popStack() {
+            if (stackState.length > 0) {
+                stackState.pop();
+                updateStackUI();
             }
-
-            renderStackUI();
         }
 
-        function renderStackUI() {
-            const container = document.getElementById('stack-container');
-            container.innerHTML = '';
+        function resetStack() {
+            stackState = [];
+            updateStackUI();
+            document.getElementById('stack-status').textContent = "Pila reiniciada. Haz clic en 'Ejecutar Llamada'.";
+        }
 
-            stackState.frames.forEach((frame, idx) => {
-                const frameEl = document.createElement('div');
-                frameEl.className = `p-3 rounded-xl border flex justify-between items-center stack-item-enter ${frame.isBaseCase ? 'bg-amber-950/40 border-amber-500/80 text-amber-200' : 'bg-slate-800 border-slate-700 text-slate-100'}`;
-                
-                frameEl.innerHTML = `
-                    <div>
-                        <span class="font-bold font-mono text-xs text-brand-400">Marco [${idx + 1}]: Factorial(${frame.nVal})</span>
-                        <span class="block text-[11px] text-slate-400">${frame.isBaseCase ? '⭐ CASO BASE (n <= 1)' : 'Pendiente: ' + frame.nVal + ' * Factorial(' + (frame.nVal-1) + ')'}</span>
-                    </div>
-                    <div class="text-right">
-                        <span class="text-[10px] uppercase text-slate-400 block">Retorno</span>
-                        <span class="font-mono text-xs font-bold ${frame.returnVal !== null ? 'text-emerald-400' : 'text-slate-500'}">${frame.returnVal !== null ? frame.returnVal : 'Esperando...'}</span>
-                    </div>
-                `;
-                container.appendChild(frameEl);
+        function updateStackUI() {
+            const box = document.getElementById('stack-box');
+            box.innerHTML = '';
+            stackState.forEach(frame => {
+                const div = document.createElement('div');
+                div.className = 'stack-frame';
+                div.textContent = frame;
+                box.appendChild(div);
             });
+
+            if(stackState.length > 0) {
+                document.getElementById('stack-status').textContent = `Llamadas activas en la Pila de Memoria: ${stackState.length}`;
+            }
         }
 
-        /* -------------------------------------------------------------
-           OVERALL PROGRESS TRACKER LOGIC
-        ------------------------------------------------------------- */
-        function updateOverallProgress() {
-            const masteredCards = allQuestionsData.filter(c => c.mastery === 'perfect').length;
-            const flashcardScore = (masteredCards / allQuestionsData.length) * 60; // 60% weight
+        // SIMULADOR DE ESCRITURA DE CODIGO
+        function validateCode() {
+            const val = document.getElementById('code-editor').value.toLowerCase();
 
-            const totalChecks = document.querySelectorAll('#tab-plan input[type="checkbox"]').length;
-            const checkedCount = document.querySelectorAll('#tab-plan input[type="checkbox"]:checked').length;
-            const checklistScore = totalChecks > 0 ? (checkedCount / totalChecks) * 40 : 0; // 40% weight
+            toggleCheck('chk-func', val.includes('funcion'));
+            toggleCheck('chk-si', val.includes('si'));
+            toggleCheck('chk-finsi', val.includes('finsi'));
+            toggleCheck('chk-retornar', val.includes('retornar') || val.includes('devolver'));
+            toggleCheck('chk-finfunc', val.includes('finfuncion'));
+        }
 
-            const totalScore = Math.round(flashcardScore + checklistScore);
-
-            document.getElementById('overall-progress-text').innerText = `${totalScore}%`;
-            document.getElementById('overall-progress-bar').style.width = `${totalScore}%`;
+        function toggleCheck(id, isValid) {
+            const el = document.getElementById(id);
+            if (isValid) {
+                el.className = 'check-item valid';
+            } else {
+                el.className = 'check-item invalid';
+            }
         }
     </script>
 </body>
